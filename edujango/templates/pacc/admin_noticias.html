@@ -1,0 +1,55 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Listado Noticias - {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'noticias' %}">Noticias</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="#">Listado Noticias</a>
+    </li>
+</ul>
+{% endblock %}
+
+
+{% block main_content %}
+<h2>Listado de noticias</h2>
+<div class="row">
+    <div class="span4 offset8">
+        <a href="{% url 'nueva_noticia' %}">Agregar noticia</a>
+    </div>        
+</div>
+<br />
+<br />
+<div class="row">
+    <div class="span8 offset2">
+        <table class="table table-stripped">
+            <thead>
+                <th>Titulo</th>
+                <th>Fecha</th>
+                <th>Creador</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href={% url noticia1 %}>Visita de la inspectora</a></td>
+                    <td>20 de Marzo 2012</td>
+                    <td>Silvana Ziliotto</td>
+                    <td><a href="#">Modificar</a> | <a href="#">Eliminar</a></td>
+                </tr>
+                <tr>
+                    <td><a href="">Nuevas aulas para taller</a></td>
+                    <td>8 de Marzo 2012</td>
+                    <td>Silvana Ziliotto</td>
+                    <td><a href="#">Modificar</a> | <a href="#">Eliminar</a></td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+</div> 
+{% endblock %}

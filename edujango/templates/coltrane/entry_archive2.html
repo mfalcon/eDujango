@@ -1,0 +1,14 @@
+<html>
+
+<head>
+  <title>Entries index</title>
+</head>
+
+<body>
+	<h3>Latest entries</h3>	
+	{% for entry in latest %}
+		<p>{{ entry.title }}</p>
+	{% endfor %}	
+</body>
+
+</html>

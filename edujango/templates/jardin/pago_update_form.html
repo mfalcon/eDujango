@@ -1,0 +1,39 @@
+{% extends 'new/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Editar Pago{% endblock %}
+{% block breadcumb %}
+  <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'jardin' %}">Inicio</a>
+  </li>
+  <li>
+    <i class="icon-group"></i>
+    <a href="#">Gestión de Alumnos</a>
+  </li>
+  <li>    
+    <a href="{% url 'pagos-al-jardin' %}">Pagos</a>
+  </li>
+  <li class="current">    
+    <a href="#">Editar Pago</a>
+  </li>
+{% endblock %}
+{% block content %}
+    <div class="col-md-12">
+        <div class="panel-body">
+            <div class="col-lg-4">
+                <form class="form-horizontal tasi-form" method="POST">{% csrf_token %}
+                {{ form|crispy }}
+                    <button type="submit" class="btn btn-primary">
+                        Guardar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extra_scripts %}
+    <script>
+        $('#gestion-alumnos').addClass('current');
+        $('#pagos').addClass('current');
+    </script>
+{% endblock %}

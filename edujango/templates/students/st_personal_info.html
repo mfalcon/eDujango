@@ -1,0 +1,96 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Informacion personal - {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'st_students_list' %}">Alumnos</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="#">Información personal</a>
+    </li>
+</ul>
+{% endblock %}
+
+
+{% block main_content %}
+<h2>Información personal</h2>
+<div class="row">
+{% if tipo in "23" %}
+<div class="span3 offset9">
+    <a href="{% url 'st_student_personal_info' st.id %}">Informacion personal</a> |
+    <a href="{% url 'st_student_info' st.id %}">Informes</a> 
+</div>
+{% else %}
+<div class="span3 offset9">
+    <a href="{% url 'st_student_personal_info' st.id %}">Informacion personal</a> |
+    <a href="{% url 'st_student_info' st.id %}">Informes</a>{% comment %} |
+    <a href="{% url 'f_student_info' st.id %}">Situacion financiera</a>{% endcomment %}
+</div>
+{% endif %}
+</div>
+<br />
+<div class="row">
+<div class="span10">
+    {% for field in student %}
+        {% if field.label == 'Tipo documento' %}
+            <p><b>{{ field.label }}</b>: {{ st.get_tipo_doc_display }}</p>
+        {% elif field.label == 'Sexo' %}
+            <p><b>{{ field.label }}</b>: {{ st.get_sexo_display }}</p>
+        {% elif field.label == 'Sala' %}
+            <p><b>{{ field.label }}</b>: 
+            {% for sala in st.sala.all %}
+                <li>{{sala}} </li>
+            {% endfor %}
+            </p>
+        {% elif field.label == 'Responsables' %}
+            <p><b>{{ field.label }}</b>: </p>
+                <ul>
+                    {% for resp in st.responsables.all %}
+                        <li>{{resp}}</li>
+                    {% endfor %}
+                </ul>
+        {% elif field.label == 'Autorizados' %}
+            <p><b>{{ field.label }}</b>: </p>
+                <ul>
+                    {% for aut in st.autorizados.all %}
+                        <li>{{aut}}</li>
+                    {% endfor %}
+                </ul>
+        {% elif field.label == 'Hermanos' %}
+            <p><b>{{ field.label }}</b>: </p>
+                <ul>
+                    {% for her in st.hermanos.all %}
+                        <li>{{her}}</li>
+                    {% endfor %}
+                </ul>
+        {% elif field.label == 'Padece enfermedad' %}
+            <p><b>{{ field.label }}</b>: {{ st.padece_enfermedad |yesno:"Si,No"  }}</p>
+        {% elif field.label == 'Controla esfinteres' %}
+            <p><b>{{ field.label }}</b>: {{ st.controla_esfinteres |yesno:"Si,No"  }}</p>
+        {% elif field.label == 'Usa mamadera' %}
+            <p><b>{{ field.label }}</b>: {{ st.usa_mamadera |yesno:"Si,No"  }}</p>
+        {% elif field.label == 'Es alergico' %}
+            <p><b>{{ field.label }}</b>: {{ st.es_alergico |yesno:"Si,No"  }}</p>
+        {% elif field.label == 'Toma medicacion' %}
+            <p><b>{{ field.label }}</b>: {{ st.toma_medicacion |yesno:"Si,No"  }}</p>
+        {% elif field.label == 'En tratamiento medico' %}
+            <p><b>{{ field.label }}</b>: {{ st.en_tratamiento_medico |yesno:"Si,No"  }}</p>
+        {% elif field.label == 'Tiene convulsiones' %}
+            <p><b>{{ field.label }}</b>: {{ st.tiene_convulsiones |yesno:"Si,No"  }}</p>
+        {% elif field.label == 'Tiene antitetanica' %}
+            <p><b>{{ field.label }}</b>: {{ st.tiene_antitetanica |yesno:"Si,No"  }}</p>
+        {% elif field.label == 'Expresion verbal' %}
+            <p><b>{{ field.label }}</b>: {{ st.expresion_verbal |yesno:"Si,No"  }}</p>
+        {% else %} 
+            <p><b>{{ field.label }}</b>: {% if field.data %}{{ field.data }}{% else %}-{% endif %}</p>
+        {% endif %}       
+    {% endfor %}
+</div>
+</div>
+
+{% endblock %}

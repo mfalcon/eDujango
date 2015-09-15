@@ -1,0 +1,52 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Noticias - {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="#">Noticias</a>
+    </li>
+</ul>
+{% endblock %}
+
+
+{% block main_content %}
+    <h2>Noticias</h2>
+    <div class="row">
+        <div class="span8 offset1">  
+        </div>
+        <div class="span3 offset9">
+            <a href="{% url 'nueva_noti' %}">Agregar noticia</a> |
+            <a href="{% url 'admin_noticias' %}">Modificar noticia</a>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="row">
+        <div class="span8">
+            <ul class="posts">
+                {% for noti in noticias %}
+                    <h3><a href="{% url 'modificar_noticia' noti.id %}">{{ noti.titulo }}</a></h3>
+                    <p><span class="inf">Fecha:</span> {{ noti.fecha }}</p>
+                    <p><span class="inf">Escrita por:</span> {{ noti.creador }}</p>
+                    <br />
+                    <p>{{ noti.texto }}</p>
+                {% endfor %}
+            </ul>
+            <br />
+            <br />
+        </div>
+        {% comment %}
+        <div class="span3 offset1">
+            <h3>Categorías</h3>
+                {% for cat in categorias %}
+                    <a href="">{{ cat }}</p>
+                {% endfor %}
+        </div>
+        {% endcomment %}
+    </div>     
+{% endblock %}

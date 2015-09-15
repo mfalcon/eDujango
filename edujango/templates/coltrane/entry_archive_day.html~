@@ -1,0 +1,15 @@
+<html>
+
+<head>
+  <title>Entries index</title>
+</head>
+
+<body>
+	<h3>Today's Entries:
+	{% for entry in object_list %}
+		<p>{{ entry.title }}</p>
+	{% endfor %}	
+		
+</body>
+
+</html>

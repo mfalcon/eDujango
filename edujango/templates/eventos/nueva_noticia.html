@@ -1,0 +1,41 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Nueva noticia - {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'noticias' %}">Noticias</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="#">Nueva noticia</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block extra_head %}
+    <script type="text/javascript" src="/media/js/tiny_mce/tiny_mce.js"></script>
+    <script type="text/javascript">
+    tinyMCE.init({
+    mode: "textareas",
+    theme: "advanced",
+    
+    });
+    </script>
+{% endblock %}
+
+{% block main_content %}
+    <h2>Agregar noticia:</h2>
+    <br />
+    <div class="row">
+        <div class="span8 offset1">
+            <form class="well" method="POST" action="">
+                {{ noticia_form.as_ul }}
+                <input type="submit" class="btn" value="Enviar">
+            </form>
+        </div>
+    </div>   
+{% endblock %}

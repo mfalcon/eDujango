@@ -1,0 +1,311 @@
+{% extends 'new/base.html' %}
+{% load staticfiles %}
+{% block title %}Alumnos{% endblock %}
+{% block breadcumb %}
+  <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'jardin' %}">Inicio</a>
+  </li>
+  <li>
+    <i class="icon-group"></i>
+    <a href="#">Gestión de Alumnos</a>
+  </li>
+  <li class="current">    
+    <a href="#">Alumnos</a>
+  </li>
+{% endblock %}
+{% block content %}
+  <div class="col-md-12">
+      {% if perms.student.change_alumno %}
+        <div class="btn-group">
+            <button class="btn btn-lg dropdown-toggle" data-toggle="dropdown">
+            <i class="icol-cog"></i> Opciones 
+            <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu pull-right">
+                <li><a class="accion" id="cambiar_division" href="#">Cambiar división</a></li>
+                <li><a class="accion" id="insertar_arancel" href="#">Insertar arancel</a></li>
+            </ul>
+        </div>
+      {% endif %}
+      <div class="btn-group">
+        {% if perms.students.add_alumno %}
+          <button onclick="window.location.href='{% url 'alumno-jardin-nuevo' %}'" class="btn btn-lg">
+              Agregar Nuevo <i class="icon-plus"></i>
+          </button>
+        {% endif %}
+      </div>
+		<div class="btn-group pull-right">
+		    <form action="{% url 'alumnos-jardin' %}" method="GET">
+		        <input type="text" name="terms" class="form-control" placeholder="Buscar"/>
+            <i class="icon-search field-icon"></i>
+		    </form>
+		</div>
+		<br><br>
+          <div class="table-responsive">
+            <input id="select_all" type="checkbox" name="all" value="">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Teléfono</th>
+                  <th>Domicilio</th>
+                  <th>Sexo</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+              	{% for alumno in object_list %}
+	                <tr id="f{{alumno.id}}">
+                    <th><input class="alumno_check" id="{{alumno.id}}" type="checkbox" name="alumno" value=""><br></th>
+	                  <td>{{alumno.nombre1}}</td>
+	                  <td>{{alumno.apellido}}</td>
+	                  <td>{{alumno.telefono}}</td>
+	                  <td>{{alumno.domicilio}}</td>
+                    <td>{{alumno.get_sexo_display}}</td>
+	                  
+	                  <td>
+	                     <a data-original-title="Detalle" data-placement="top" data-toggle="tooltip" class="btn btn-info btn-sm tooltips" href="/jardin/alumnos/{{alumno.id}}/detalle/"><i class="glyphicon glyphicon-eye-open"></i></a>
+                      {% if perms.student.change_alumno %}
+	                     <a data-original-title="Editar" data-placement="top" data-toggle="tooltip" class="btn btn-success btn-sm tooltips" href="/jardin/alumnos/{{alumno.id}}/editar/"><i class="glyphicon glyphicon-pencil"></i></a>
+                      {% endif %}
+                      {% if perms.student.change_alumno %}
+	                     <a data-original-title="Eliminar" data-placement="top" class="btn btn-danger btn-sm tooltips" data-toggle="modal" href="#m{{alumno.id}}"><i class="glyphicon glyphicon-trash"></i></a>
+                      {% endif %}
+	                </td>
+	                </tr>
+	                <!-- Modal -->
+                    <div class="modal fade" id="m{{alumno.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Eliminar Alumno</h4>
+                                </div>
+                                <div class="modal-body">
+
+                                <p>¿Esta seguro que desea eliminar alumno <strong>{{alumno}}</strong>?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>
+                                    <button id="{{alumno.id}}" href="/jardin/alumnos/{{alumno.id}}/eliminar/" class="btn btn-danger eliminar" type="submit"> Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- modal -->
+	            {% endfor %}
+              </tbody>
+            </table>
+            {% if is_paginated %}
+                <div class="pagination">
+                    <span class="page-links">
+                        {% if page_obj.has_previous %}
+                            <a href="/jardin/alumnos?page={{ page_obj.previous_page_number }}">Anterior</a>
+                        {% endif %}
+                        <span class="page-current">
+                            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                        </span>
+                        {% if page_obj.has_next %}
+                            <a href="/jardin/alumnos?page={{ page_obj.next_page_number }}"> Siguiente</a>
+                        {% endif %}
+                    </span>
+                </div>
+            {% endif %}
+          </div>
+
+          <!-- Modal Monto -->
+          <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="monto_modal">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Ingresar Monto</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="form-group">
+                      <div class="col-sm-10">
+                        <input id="monto" type="number" step="0.01" class="form-control" placeholder="Monto">
+                        <br >
+                        <input id="concepto" type="text" class="form-control" placeholder="Concepto">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                  <button id="ingresar_arancel" type="button" class="btn btn-primary">Ingresar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal Division -->
+          <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="division_modal">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Seleccione división</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="form-group">
+                      <div class="col-sm-12">
+                        <select class="form-control" id="select_sala_1">
+                          <option>Elija una sala</option>
+                          {% for sala in salas %}
+                            <option id="{{sala.id}}">{{sala}}</option>
+                          {% endfor %}
+                        </select>
+                        <br>
+                        <select class="form-control" id="select_sala_2">
+                          <option>Elija una sala</option>
+                          {% for sala in salas %}
+                            <option id="{{sala.id}}">{{sala}}</option>
+                          {% endfor %}
+                        </select>
+                      </div> 
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                  <button id="seleccionar_sala" type="button" class="btn btn-primary">Seleccionar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+  </div>
+{% endblock %}
+{% block extra_scripts %}
+	<!-- Script para eliminar -->
+	<script src="{% static 'js/college/eliminar.js' %}"></script>
+  <script src="{% static 'js/college/orden-tabla.js' %}"></script>
+	<script>
+    $('#gestion-alumnos').addClass('current');
+		$('#alumnos').addClass('current');
+	</script>
+
+
+  <script>
+
+    $("#select_all").click(function(e) {
+      $(':checkbox').prop('checked', this.checked);
+    });
+
+    var ids = [];
+    var monto = '';
+    var sala1 = 0;
+    var sala2 = 0;
+    var concepto = '';
+
+
+    $('.accion').click(function() {
+
+      ids = [];
+      var opcion = this.id;
+
+
+      // Arma un array con los ids de los seleccionados
+      $(".alumno_check:checked").each(function(){ ids.push(this.id); });
+
+      if (ids.length == 0) {
+        alert('Debe seleccionar al menos uno')
+        return false
+      }
+
+      if (opcion == 'cambiar_division') {
+        // Llamamos al modal para seleccionar division
+        $('#division_modal').modal('show');
+      } else {
+        // Llamamos al modal para ingresar monto
+        $('#monto_modal').modal('show');
+      }
+    });
+    
+
+    $('#ingresar_arancel').click(function() {
+
+      monto = $('#monto').val();
+      concepto = $('#concepto').val();
+
+      if (monto != '') {   // Verificamos que halla ingresado algo
+        $('#monto_modal').modal('hide');
+      } else {
+        alert('Debe ingresar un monto');
+      };
+    });
+
+    $('#seleccionar_sala').click(function() {
+
+      sala1 = $('#select_sala_1').find(":selected").attr('id');
+      sala2 = $('#select_sala_2').find(":selected").attr('id');
+
+      if (sala1 != undefined || sala2 != undefined) {   // Verificamos que halla ingresado algo
+        $('#division_modal').modal('hide');
+        cambiar_division(); // Llama a la funcion que hace el trabajo
+      } else {
+        alert('Debe seleccionar al menos una sala');
+      };
+    });
+
+
+    $('#monto_modal').on('hidden.bs.modal', function (e) {
+
+      // Si hay monto es porque esta todo ok
+      if (monto != '') {
+        // Llamamos a la vista que se encarga
+        $.ajax({
+            url: '/jardin/insertar_arancel/',
+            dataType: 'json',
+            data: {'monto':monto, 'ids':ids.toString(), 'concepto':concepto},
+            success: function(respuesta) {
+              if (respuesta.resultado) {
+                alert('Acción exitosa')
+              } else {
+                alert('Hubo un error, intente nuevamente')
+              }
+              monto = '';
+              concepto = '';
+            }
+        });
+      };
+    });
+
+
+    function cambiar_division() {
+      // Si hay sala es porque esta todo ok
+      if (sala1 != undefined || sala2 != undefined) {
+
+        if (sala1 == undefined) {
+          sala1 = 0;
+        };
+        if (sala2 == undefined) {
+          sala2 = 0;
+        };
+
+        // Llamamos a la vista que se encarga
+        $.ajax({
+            url: '/jardin/cambiar_division/',
+            dataType: 'json',
+            data: {'ids':ids.toString(), 'sala1':sala1, 'sala2':sala2},
+            success: function(respuesta) {
+              if (respuesta.resultado) {
+                alert('Acción exitosa')
+              } else {
+                alert('Hubo un error, intente nuevamente')
+              }
+
+            }
+        });
+      };
+    }
+   
+
+    
+  </script>
+{% endblock %}

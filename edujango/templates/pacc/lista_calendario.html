@@ -1,0 +1,112 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Listado Calendario - {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'noticias' %}">Calendario</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="#">Listado Calendario</a>
+    </li>
+</ul>
+{% endblock %}
+
+
+{% block main_content %}
+<h2>Listado de eventos</h2>
+<div class="row">
+    <div class="span4 offset8">
+        <a href="{% url 'nueva_noticia' %}">Agregar evento</a>
+    </div>        
+</div>
+<br />
+<br />
+<div class="row">
+    <div class="span8 offset2">
+        <table class="table table-stripped">
+            <thead>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Creador</th>
+                <th>Detalle</th>
+                <th>Tipo</th>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <td><a href="{% url 'noticia1' %}">03/11/2012</a></td>
+                    <td>14:00</td>
+                    <td>Silvana Ziliotto</td>
+                    <td>Sala Celeste TT</td>
+                    <td>Reunión</td>
+                </tr>
+                {% comment %}
+                <tr>
+                    <td><a href="">03/18/2012</a></td>
+                    <td>15:30</td>
+                    <td>Morini, Barbara</td>
+                    <td>Sala Rosa TM</td>
+                    <td>Reunión</td>
+                    <td><a href="#">Modificar</a> | <a href="#">Eliminar</a></td>
+                </tr>
+                {% endcomment %}
+                {% comment %}
+                <tr>
+                    <td><a href=""></a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><a href=""></a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><a href=""></a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><a href=""></a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><a href=""></a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><a href=""></a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><a href=""></a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><a href=""></a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                {% endcomment %}
+            </tbody>
+        </table>
+    </div>
+</div> 
+{% endblock %}

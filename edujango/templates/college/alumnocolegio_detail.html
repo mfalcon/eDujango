@@ -1,0 +1,54 @@
+{% extends 'college/base_college.html' %}
+{% block title %}Detalle {{ object }}{% endblock %}
+{% block content %}
+	<ol class="breadcrumb">
+	  <li><a href="{% url 'alumnos' %}">Alumnos</a></li>
+	  <li class="active">Detalle</li>
+	</ol>
+	<br>
+	<div class="row">
+        <div class="col-sm-3 col-md-3">
+        	<img class="media-object img-rounded img-responsive"  src="http://placehold.it/350x450" alt="placehold.it/350x250" >
+        </div>
+        <div class="col-sm-4 col-md-4">
+            <blockquote>
+                <p>{{object}}</p> 
+                <small>
+                	<cite title="Source Title">{{object.domicilio}} - {{object.localidad}}, {{object.nacionalidad}}  
+                		<i class="fa fa-map-marker"></i>
+                	</cite>
+                </small>
+            </blockquote>
+            <p> 
+            	<i class="fa fa-phone"></i><b> Tel:</b> {{object.telefono}}<br /> 
+            	<i class="fa fa-envelope"></i><b> Email:</b> {{object.email}}<br /> 
+                <i class="fa fa-chevron-right"></i><b> Tipo de documento:</b> {{object.tipo_doc}}<br /> 
+                <i class="fa fa-chevron-right"></i><b> Número de documento:</b> {{object.num_doc}}<br /> 
+                <i class="fa fa-user"></i><b> Sexo:</b> {{object.sexo}}<br /> 
+                <i class="fa fa-calendar"></i><b> Fecha de nacimiento:</b> {{object.fecha_nac}}<br /> 
+                <i class="fa fa-chevron-right"></i><b> Division:</b> {{object.division}}<br /> 
+            </p>
+        </div>
+        <div class="col-sm-4 col-md-4">
+            <h2 class="page-header">Notas</h2>
+            {% for nota in object.calificaciones.all %}
+            	<b>Materia: </b>{{nota.materia}}  <b>Nota: </b> {{nota.nota}}<br />
+            {% endfor %}
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-4 col-md-4">
+            <h2 class="page-header">Materias</h2>
+            {% for materia in object.division.materias.all %}
+                <b>Materia: </b>{{materia}}
+            {% endfor %}
+        </div>
+    </div>
+   
+{% endblock %}
+{% block extra_script %}
+    <script>
+        $('#alumnos').addClass('active');
+    </script>
+{% endblock %}

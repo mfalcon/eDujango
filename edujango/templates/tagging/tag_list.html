@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load tagging_tags %}
+
+{% block title %}Open Unit - Blog - Tags{% comment %}| Ultimas entradas{% endcomment %}{% endblock %}
+
+{% block content %}
+   <div id="columnacentral">
+    {% for tag in object_list %}
+      <h2>{{ tag.name }}</h2>
+    {% endfor %}
+   <div> </div>
+   
+   <p>Tag cloud</p>
+   {% tag_cloud_for_model coltrane.Entry as tag_list with steps=20 min_count=1 distribution=linear %}
+    {% for tag in tag_list %}
+             <font size="{{ tag.font_size }}">
+<a href="/weblog/tags/entries/{{ tag.name }}">{{ tag.name }}</a></font>
+            
+    {% endfor %}
+{% endblock %}
+
+

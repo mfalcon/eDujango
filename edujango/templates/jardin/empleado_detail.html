@@ -1,0 +1,55 @@
+{% extends 'new/base.html' %}
+{% block title %}Detalle {{ object }}{% endblock %}
+{% block breadcumb %}
+  <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'jardin' %}">Inicio</a>
+  </li>
+  <li>
+    <i class="icon-group"></i>
+    <a href="{% url 'empleados-jardin' %}">Empleados</a>
+  </li>
+  <li class="current">    
+    <a href="#">Detalle</a>
+  </li>
+{% endblock %}
+{% block content %}
+        <div class="col-sm-3 col-md-3">
+        	<img class="media-object img-rounded img-responsive"  src="http://placehold.it/350x450" alt="placehold.it/350x250" >
+        </div>
+        <div class="col-sm-4 col-md-4">
+            <blockquote>
+                <p>{{object}}</p> 
+                <small>
+                	<cite title="Source Title">{{object.domicilio}} - {{object.localidad}}, {{object.nacionalidad}}  
+                		<i class="icon-map-marker"></i>
+                	</cite>
+                </small>
+            </blockquote>
+            <p> 
+            	<i class="icon-phone"></i><b> Tel:</b> {{object.telefono}}<br /> 
+                <i class="icon-chevron-right"></i><b> Tipo de documento:</b> {{object.get_tipo_doc_display}}<br /> 
+                <i class="icon-chevron-right"></i><b> Número de documento:</b> {{object.num_doc}}<br /> 
+                <i class="icon-user"></i><b> Sexo:</b> {{object.get_sexo_display}}<br /> 
+                <i class="icon-calendar"></i><b> Fecha de nacimiento:</b> {{object.fecha_nac}}<br /> 
+                
+            </p>
+        </div>
+        <div class="col-sm-4 col-md-4">
+            <h2 class="page-header">Info</h2>
+        </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-4 col-md-4">
+            <div id="container-form-pago" class="span4">
+            </div>
+        </div>
+    </div>
+   
+{% endblock %}
+{% block extra_scripts %}
+    <script>
+        $('#gestion-empleados').addClass('current');
+        $('#empleados-jardin').addClass('current');
+    </script>
+{% endblock %}

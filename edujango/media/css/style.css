@@ -1,0 +1,156 @@
+/* base.html */
+
+a {
+    text-decoration: none;
+}
+
+hr.up { 
+    background-color: #E0DBC1;
+    margin-bottom: 0px;
+}
+
+hr.down {
+    background-color: #E0DBC1;
+    margin-bottom: 1px;
+}
+
+li {
+    list-style-type:none;
+}
+
+#bienvenida {
+    color: #6E542C;
+    font-weight: bold;
+}
+
+#logo {
+    heigth:150px;
+    width:250px;
+}
+
+#header {
+    background-color: #FFF;
+}
+
+#footer {
+    background-color: #FFF;
+    text-align: center;
+}
+
+#nav {
+    text-align: left;
+}
+/* index.html */
+
+.icons {
+  height:150px;
+  width:150px;
+}
+
+.link {
+    text-align: center;
+}
+
+.desc {
+    font-family: Helvetica, Arial, sans-serif;  
+    font-size: 16px;
+    text-align: center;
+    color: #654945;
+}
+
+/* forms */
+
+
+fieldset {
+    border-color: #CCCCCC;
+    border-right: medium none;
+    border-style: solid none none;
+    border-width: 1px medium medium;
+}
+
+legend {
+  background: none repeat scroll 0 0 transparent;
+  color: #003366;
+  font-size: 1.3em;
+  font-weight: bold;
+  margin: 1em 0;
+  padding: 0 0.5em;
+}
+
+label {
+  float: left;
+  padding: 0 1em;
+  text-align: right;
+  width: 100px;
+}
+
+fieldset div {
+  display: block;
+  margin-bottom: 0.5em;
+  padding: 0;
+}
+
+fieldset div input, fieldset div textarea {
+  border-color: #555555 #CCCCCC #CCCCCC #555555;
+  border-style: solid;
+  border-width: 1px;
+  color: #333333;
+  padding: 1px;
+  width: 150px;
+}
+
+fieldset div select {
+  padding: 1px;
+}
+
+div.fm-multi div {
+    margin: 5px 0;
+}
+
+div.fm-multi input {
+    width: 1em;
+}
+
+div.fm-multi label {
+    display: block;
+    padding-left: 5em;
+    text-align: left;
+    width: 200px;
+}
+
+#fm-submit {
+  clear: both;
+  padding-top: 1em;
+  text-align: center;
+}
+
+#fm-submit input {
+  background: none repeat scroll 0 0 #555555;
+  border: 1px solid #333333;
+  color: #FFFFFF;
+  font-size: 100%;
+  padding: 2px 1em;
+}
+
+input:focus, textarea:focus {
+  background: none repeat scroll 0 0 #EFEFEF;
+  color: #000000;
+}
+
+
+fieldset div.fm-req label:before {
+  content: "* ";
+  font-weight: bold;
+}
+
+fieldset div.fm-opt label {
+  color: #8F8F8F;
+}
+
+.helptext {
+    color: brown;
+}
+
+/* tables */
+#ingreso {color:green;}
+#gasto {color:red;}

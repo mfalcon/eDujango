@@ -1,0 +1,73 @@
+{% extends "base_pacc.html" %}
+{% load staticfiles %}
+{% block title %}Index - {{ block.super }}{% endblock %}
+
+{% comment %}
+OWNER = 0 # cashflow, sueldos
+ADMIN = 1 # secretaria(cuotas, gastos)
+MAESTRA = 2 #informes, salas
+RESPONSABLE = 3 #informes especificos
+DIRECTORA = 4
+{% endcomment %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li class="active">
+        <a href="#">Index</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main_content %}
+    <div class="row">
+        <div class="span8 offset2">
+            <h2>Bienvenido. Por favor seleccione una opci&oacute;n</h2>
+        </div>
+    </div>
+    <br />
+    <br />
+    {% if user.empleado.puesto == 2 or user.empleado.responsable  or user.empleado.puesto == 4 %}
+    <div class="row">
+        <div class="span3 offset1">
+            <a href="{% url 'st_students_list' %}"><img class="icons" src="{% static 'images/icons/user_group.png' %}"></a>
+            <p class="texto-iconos">Alumnos</p>
+        </div>
+        <div class="span3 offset1">
+            <a href="{% url 'noti_index' %}"<img class="icons" src="{% static 'images/icons/News.png' %}"></a>
+            <p class="texto-iconos">Noticias</p>
+        </div>
+    </div>
+    <br />
+    {% else %}
+    {% comment %}
+    <div class="row">
+        <div class="span3 offset1">
+            <a href="{% url 'st_students_list' %}"><img class="icons" src="{% static 'images/icons/user_group.png' %}"></a>
+            <p class="texto-iconos">Alumnos</p>
+        </div>
+        <div class="span3 offset1">
+            <a href="{% url 'noti_index' %}"<img class="icons" src="{% static 'images/icons/News.png' %}"></a>
+            <p class="texto-iconos">Noticias</p>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="span3 offset5">
+            <a href="{% url 'f_index' %}"><img class="icons" src="{% static 'images/icons/Coinstack.png' %}"></a>
+            <p class="texto-iconos">Finanzas</p>
+        </div>
+    </div>
+    {% endcomment %}
+        <div class="row">
+        <div class="span3 offset1">
+            <a href="{% url 'f_index' %}"><img class="icons" src="{% static 'images/icons/Coinstack.png' %}"></a>
+            <p class="texto-iconos">Finanzas</p>
+        </div>
+        <div class="span3 offset1">
+            <a href="{% url 'noti_index' %}"<img class="icons" src="{% static 'images/icons/News.png' %}"></a>
+            <img class="icons" src="{% static 'images/icons/News.png' %}">
+            <p class="texto-iconos">Noticias</p>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,735 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Calendario - {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="{% url 'calendario' %}">Calendario</a>
+    </li>
+</ul>
+{% endblock %}
+
+
+{% block extra_head %}
+<link rel="stylesheet" href="/media/css/cal_style.css" type="text/css">
+<script src="/media/js/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript">
+    function initMenu() {
+        var block = $(".day");
+            block.addClass("clickable");
+            block.hover(function(){window.status = $(this)}, function(){window.status = ""});
+        
+        $('.open').hide();
+        block.click(
+            function() {
+                $(this).parents('div:eq(0)').find('.open').slideToggle('fast'); 
+            }
+        );}
+    $(document).ready(function() {initMenu();});
+</script>       
+{% endblock %}
+
+{% block main_content %}
+    <div class="row">
+        <div class="span7 offset1">
+            <h2>Calendario</h2>
+        </div>
+        
+        <div class="span4">
+            <a href="{% url 'calendar_entry' %}">Agregar evento</a> |
+            <a href="{% url 'calendar_entry' %}">Modificar evento</a>{% comment %} |
+            <a href="{% url 'admin_calendario' %}">Administrar eventos</a>
+        </div>
+        {% endcomment %}
+    </div>
+    <br />
+    <div class="row">
+        <div class="span12"></div>
+        <div id="calendar">                 
+                <div id="calcontainer">
+                    <div id="calheader">
+                        <h2><i class="icon-chevron-left"></i>  Abril 2012  <i class="icon-chevron-right"></i></h2>
+                    </div>      
+                    <div id="daysweek">
+                        <div class="dayweek"><p>Lunes</p></div>
+                        <div class="dayweek"><p>Martes</p></div>
+                        <div class="dayweek"><p>Miércoles</p></div>
+                        <div class="dayweek"><p>Jueves</p></div>
+                        <div class="dayweek"><p>Viernes</p></div>
+                        <div class="dayweek"><p>Sábado</p></div>
+                        <div class="dayweek brn"><p>Domingo</p></div>
+                    </div>
+                    <div id="daysmonth">
+    <!---------------------------------------- week 1 ---------------------------------------->
+                        <div class="week">
+                            <div class="day">
+                                <div class="daybar"><p>26</p></div>
+                                <div class="dots">
+                                    <ul>
+
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                    
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>      
+                            <div class="day">
+                                <div class="daybar"><p>27</p></div>
+                                <div class="dots">
+                                    <ul>
+      
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                 
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>              
+                            <div class="day">
+                                <div class="daybar"><p>28</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                                     
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>          
+                            <div class="day">
+                                <div class="daybar"><p>29</p></div>
+                                <div class="dots">
+                                    <ul>
+
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>  
+                            <div class="day">
+                                <div class="daybar"><p>30</p></div>
+                                <div class="dots">
+                                    <ul>
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>          
+                            <div class="day">
+                                <div class="daybar"><p>31</p></div>
+                                <div class="dots">
+                                    <ul>
+
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                                       
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>              
+                            <div class="day brn">
+                                <div class="daybar"><p>1</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                                            
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>          
+                        </div>  
+    <!---------------------------------------- week 2 ---------------------------------------->
+                        <div class="week">
+                            <div class="day">
+                                <div class="daybar"><p>2</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                                          
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>      
+                            <div class="day">
+                                <div class="daybar"><p>3</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                          
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>              
+                            <div class="day">
+                                <div class="daybar"><p>4</p></div>
+                                <div class="dots">
+                                    <ul>
+                                     
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                                              
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>          
+                            <div class="day">
+                                <div class="daybar"><p>5</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                            
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>  
+                            <div class="day">
+                                <div class="daybar"><p>6</p></div>
+                                <div class="dots">
+                                    <ul>
+
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+        
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>          
+                            <div class="day">
+                                <div class="daybar"><p>7</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                               
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>              
+                            <div class="day brn">
+                                <div class="daybar"><p>8</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>          
+                        </div>  
+    <!---------------------------------------- week 3 ---------------------------------------->
+                        <div class="week">
+                            <div class="day big">
+                                <div class="daybar"><p>9</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>      
+                            <div class="day big">
+                                <div class="daybar"><p>10</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        <li class="blue"></li>
+                                        <li class="blue"></li>
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                        <li class="blue l3 a1"><p>13:30 Sala Roja TM</p></li>
+                                        <li class="blue l3 a1"><p>15:30 Sala Naranja TT</p></li>
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>              
+                            <div class="day today big">
+                                <div class="daybar"><p>11</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        <li class="blue"></li>
+                                        <li class="blue"></li>
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                        <li class="blue l2 a10"><p>10:30 Sala Naranja TM</p></li>
+                                        <li class="blue l2 a13"><p>14:00 Sala Amarilla TM</p></li>                       
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>          
+                            <div class="day big">
+                                <div class="daybar"><p>12</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        <li class="blue"></li>
+                                        <li class="blue"></li>
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                        <li class="blue l2 a19"><p>13:30 Sala Rosa TM</p></li>
+                                        <li class="blue l2 a19"><p>15:30 Sala Celeste TM</p></li>
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>  
+                            <div class="day big">
+                                <div class="daybar"><p>13</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        <li class="blue"></li>
+                                        <li class="blue"></li>
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                        <li class="blue l2 a1"><p>08:30 Sala Rosa TM</p></li> 
+                                        <li class="blue l2 a2"><p>10:30 Sala Roja TM</p></li>                      
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>          
+                            <div class="day big">
+                                <div class="daybar"><p>14</p></div>
+                                <div class="dots">
+                                    <ul>
+                                       
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                                         
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>              
+                            <div class="day big brn">
+                                <div class="daybar"><p>15</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                                    
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>          
+                        </div>  
+    <!---------------------------------------- week 4 ---------------------------------------->
+                        <div class="week">
+                            <div class="day">
+                                <div class="daybar"><p>16</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>      
+                            <div class="day">
+                                <div class="daybar"><p>17</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                  
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>              
+                            <div class="day">
+                                <div class="daybar"><p>18</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                                          
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>          
+                            <div class="day">
+                                <div class="daybar"><p>19</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>  
+                            <div class="day">
+                                <div class="daybar"><p>20</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                           
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>          
+                            <div class="day">
+                                <div class="daybar"><p>21</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>              
+                            <div class="day brn">
+                                <div class="daybar"><p>22</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>          
+                        </div>  
+    <!---------------------------------------- week 5 ---------------------------------------->
+                        <div class="week">
+                            <div class="day">
+                                <div class="daybar"><p>23</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                 
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>      
+                            <div class="day">
+                                <div class="daybar"><p>24</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>              
+                            <div class="day">
+                                <div class="daybar"><p>25</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                             
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>          
+                            <div class="day">
+                                <div class="daybar"><p>26</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>  
+                            <div class="day">
+                                <div class="daybar"><p>27</p></div>
+                                <div class="dots">
+                                    <ul>
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>  
+                            <div class="day">
+                                <div class="daybar"><p>28</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                           
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>              
+                            <div class="day brn">
+                                <div class="daybar"><p>29</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                        
+                                                              
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>          
+                        </div>
+    <!---------------------------------------- week 5 end ---------------------------------------->                        <div class="week">
+                            <div class="day">
+                                <div class="daybar"><p>30</p></div>
+                                <div class="dots">
+                                    <ul>
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>      
+                            <div class="day">
+                                <div class="daybar"><p>1</p></div>
+                                <div class="dots">
+                                    <ul>                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>              
+                            <div class="day">
+                                <div class="daybar"><p>2</p></div>
+                                <div class="dots">
+                                    <ul>
+
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                                               
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>          
+                            <div class="day">
+                                <div class="daybar"><p>3</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                       
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>  
+                            <div class="day">
+                                <div class="daybar"><p>4</p></div>
+                                <div class="dots">
+                                    <ul>
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>          
+                            <div class="day">
+                                <div class="daybar"><p>5</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>         
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>              
+                            <div class="day brn">
+                                <div class="daybar"><p>6</p></div>
+                                <div class="dots">
+                                    <ul>
+                                        
+                                        
+                                    </ul>
+                                </div>  
+                                <!-- slide open -->
+                                <div class="open">
+                                    <ul>
+
+                                    </ul>
+                                </div>  
+                                <!-- slide closed -->
+                            </div>          
+                        </div> 
+                    
+                    
+                    </div>              
+                </div>                  
+                <div id="calcat">
+                    <div class="caldot blue"></div><p>Reunión</p>
+                    <div class="caldot yellow"></div><p>Fiesta</p>
+                    <div class="caldot green"></div><p>Acto</p>
+                    <div class="caldot red"></div><p>Campamento</p>
+                </div>              
+            </div>  
+        </div>
+    </div>
+    
+    </div>     
+{% endblock %}

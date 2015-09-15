@@ -1,0 +1,114 @@
+{% extends 'new/base.html' %}
+{% load staticfiles %}
+{% block title %}Salas{% endblock %}
+{% block breadcumb %}
+  <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'jardin' %}">Inicio</a>
+  </li>
+  <li>
+    <i class="icon-group"></i>
+    <a href="#">Gestión de Alumnos</a>
+  </li>
+  <li class="current">    
+    <a href="#">Salas</a>
+  </li>
+{% endblock %}
+{% block content %}
+  <div class="col-md-12">
+    <div class="btn-group">
+      {% if perms.student.add_sala %}
+        <button onclick="window.location.href='{% url 'sala-jardin-nuevo' %}'" class="btn btn-lg">
+            Agregar Nueva <i class="icon-plus"></i>
+        </button>
+      {% endif %}
+    </div>
+		<div class="btn-group pull-right">
+		    <form action="{% url 'salas-jardin' %}" method="GET">
+		        <input type="text" name="terms" class="form-control" placeholder="Buscar"/>
+            <i class="icon-search field-icon"></i>
+		    </form>
+		</div>
+		<br><br>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Sala</th>
+                  <th>Turno</th>
+                  <th>Sección</th>
+                  <th>Año lectivo</th>
+                  <th>Fecha de Inicio</th>
+                  <th>Capacidad</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+              	{% for sala in object_list %}
+	                <tr id="f{{sala.id}}">
+	                  <td>{{sala.get_sala_display}}</td>
+	                  <td>{{sala.get_turno_display}}</td>
+                    <td>{{sala.get_seccion_display}}</td>
+                    <td>{{sala.anio_lectivo}}</td>
+                    <td>{{sala.fecha_inicio}}</td>
+                    <td>{{sala.capacidad}}</td>
+	                  <td>
+	                     <a data-original-title="Detalle" data-placement="top" data-toggle="tooltip" class="btn btn-info btn-sm tooltips" href="/jardin/salas/{{sala.id}}/detalle/"><i class="glyphicon glyphicon-eye-open"></i></a>
+                      {% if perms.student.change_sala %}
+	                     <a data-original-title="Editar" data-placement="top" data-toggle="tooltip" class="btn btn-success btn-sm tooltips" href="/jardin/salas/{{sala.id}}/editar/"><i class="glyphicon glyphicon-pencil"></i></a>
+                      {% endif %}
+                      {% if perms.student.delete_sala %}
+	                     <a data-original-title="Eliminar" data-placement="top" class="btn btn-danger btn-sm tooltips" data-toggle="modal" href="#m{{sala.id}}"><i class="glyphicon glyphicon-trash"></i></a>
+                      {% endif %}
+	                </td>
+	                </tr>
+	                <!-- Modal -->
+                    <div class="modal fade" id="m{{sala.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Eliminar Sala</h4>
+                                </div>
+                                <div class="modal-body">
+
+                                <p>¿Esta seguro que desea eliminar la sala <strong>{{sala}}</strong>?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>
+                                    <button id="{{sala.id}}" href="/jardin/salas/{{sala.id}}/eliminar/" class="btn btn-danger eliminar" type="submit"> Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- modal -->
+	            {% endfor %}
+              </tbody>
+            </table>
+            {% if is_paginated %}
+                <div class="pagination">
+                    <span class="page-links">
+                        {% if page_obj.has_previous %}
+                            <a href="/salas/salas?page={{ page_obj.previous_page_number }}">Anterior</a>
+                        {% endif %}
+                        <span class="page-current">
+                            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                        </span>
+                        {% if page_obj.has_next %}
+                            <a href="/salas/salas?page={{ page_obj.next_page_number }}"> Siguiente</a>
+                        {% endif %}
+                    </span>
+                </div>
+            {% endif %}
+          </div>
+  </div>
+{% endblock %}
+{% block extra_scripts %}
+	<!-- Script para eliminar -->
+	<script src="{% static 'js/college/eliminar.js' %}"></script>
+  <script src="{% static 'js/college/orden-tabla.js' %}"></script>
+	<script>
+    $('#gestion-alumnos').addClass('current');
+		$('#salas').addClass('current');
+	</script>
+{% endblock %}

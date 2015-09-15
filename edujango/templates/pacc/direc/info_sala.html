@@ -1,0 +1,50 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Jardín Mi Arco Iris - {{ block.super }}{% endblock %}
+
+
+
+{% block main_content %}
+<h2>Información Sala Verde, turno mañana:</h2>
+    <div class="row">
+        <ul>
+            <li>Maestra:</li>
+            <li>Cantidad de alumnos:</li>
+                <ul>
+                    <li>Nenes:</li>
+                    <li>Nenas:</li>
+                </ul>
+        </ul>
+        <form class="well form-search">
+            <input type="text" class="input-medium search-query">
+            <button type="submit" class="btn">Search</button>
+        </form>
+        <h3>Alumnos:</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                  <th>Nombre</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td><b>Total alumnos:</b> 25</td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr>
+                  <td><a href="#">Emiliano Fiore</a></td>
+                </tr>
+                <tr>
+                  <td><a href="#">Gabriel Benavidez</a></td>
+                </tr>
+                <tr>
+                  <td><a href="#">Ailén Soria</a></td>
+                </tr>
+                <tr>
+                  <td><a href="#">Marcos Echegueren</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div> 
+{% endblock %}

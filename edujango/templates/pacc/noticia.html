@@ -1,0 +1,41 @@
+{% extends "base_pacc.html" %}
+ 
+{% block title %}Noticia - {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'noticias' %}">Noticias</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="#">Detalle Noticia</a>
+    </li>
+</ul>
+{% endblock %}
+{% block main_content %}
+
+<div class="row">
+    <div class="span3 offset9">
+        <a href="">Modificar </a>|
+        <a id="delete"> Eliminar </a>
+    </div>
+</div>
+<div class="row">
+    <div class="span8 offset1">
+        <p><span class="inf">Título: </span>Inicio de clases</p>
+        <p><span class="inf">Creada por: </span>Silvana Ziliotto</p>
+        <p><span class="inf">Fecha: </span>10 de Marzo de 2012</p>
+        <p><span class="inf">Noticia: </span></p>
+        <div class="span8 offset1 texto-inf">
+            <p>Bla bla bla bla bla...</p>
+        </div>
+    </div>
+</div>
+
+    
+    
+
+{% endblock %}

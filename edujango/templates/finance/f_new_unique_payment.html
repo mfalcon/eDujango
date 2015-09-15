@@ -1,0 +1,52 @@
+{% load bootstrap3 %}
+<div class="row">
+    <div class="span8 offset2">
+        <h2 class="page-header">Nuevo pago unico</h2>
+        <p id="p"></p>
+        <form id="form-pago" method="POST" action="{% url 'f_new_unique'  st.id %}" >{% csrf_token %}
+            {% bootstrap_form form %}
+            <input id="boton_aceptar" type="submit" value="Enviar">
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+        $(document).ready(function() {
+            function block_form() {
+                $('textarea').attr('disabled', 'disabled');
+                $('input').attr('disabled', 'disabled');
+            }
+
+            function unblock_form() {
+                $('textarea').removeAttr('disabled');
+                $('input').removeAttr('disabled');
+                $('.errorlist').remove();
+            }
+
+            // prepare Options Object for plugin
+            var options = {
+                beforeSubmit: function(form, options) {
+                    // return false to cancel submit
+                    block_form();
+                },
+                success: function() {
+                    
+                    window.location.reload();
+                },
+                error:  function(resp) {
+                    unblock_form();
+                    // render errors in form fields
+                    var errors = JSON.parse(resp.responseText);
+                    for (error in errors) {
+                        //var id = '#id_' + error;
+                        //$(id).parent('p').prepend(errors[error]);
+                        $('#p').prepend(errors[error]);
+                    }
+                    setTimeout(function() {
+                        $("#form_ajax_error").hide();
+                    }, 5000);
+                }
+            };
+            $('#form-pago').ajaxForm(options);
+        });
+    </script>

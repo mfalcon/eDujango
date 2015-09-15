@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+
+{% block title %}Open Unit - Blog - Categorias{% endblock %}
+
+{% block content %}
+   <div id="columnacentral">
+    {% for cat in object_list %}
+      <h2>{{ cat.title }}: </h2>
+      {% for e in cat.entry_set.all %}
+          <a href={{ e.get_absolute_url }}>{{ e.title }}</a>
+      {% endfor %}
+    {% endfor %}
+    <div> </div>    
+{% endblock %}
+
+

@@ -1,0 +1,108 @@
+{% extends 'new/base_colegio.html' %}
+{% load staticfiles %}
+{% block title %}Materia Division{% endblock %}
+{% block breadcumb %}
+  <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'college' %}">Inicio</a>
+  </li>
+  <li>
+    <i class="icon-group"></i>
+    <a href="#">Gestión de Profesores</a>
+  </li>
+  <li class="current">    
+    <a href="#">Materias Division</a>
+  </li>
+{% endblock %}
+{% block content %}
+	<div class="col-md-12">
+    <div class="btn-group">
+      {% if perms.college.add_materiadivision %}
+        <button onclick="window.location.href='{% url 'materiadivision-nuevo' %}'" class="btn btn-lg">
+            Agregar Nuevo <i class="icon-plus"></i>
+        </button>
+      {% endif %}
+    </div>
+		<div class="btn-group pull-right">
+		    <form action="{% url 'materiasdivisiones' %}" method="GET">
+		        <input type="text" name="terms" class="form-control" placeholder="Buscar"/>
+            <i class="icon-search field-icon"></i>
+		    </form>
+		</div>
+		<br><br>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Materia</th>
+                  <th>Division</th>
+                  <th>Horario</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+              	{% for materiaDivision in object_list %}
+	                <tr id="f{{materiaDivision.id}}">
+	                  <td>{{materiaDivision.materia}}</td>
+	                  <td>{{materiaDivision.division}}</td>
+	                  <td>{{materiaDivision.horario}}</td>
+	                  
+	                  <td>
+                      {% if perms.college.change_materiadivision %}
+	                     <a data-original-title="Editar" data-placement="top" data-toggle="tooltip" class="btn btn-success btn-sm tooltips" href="/colegio/materiaDivision/{{materiaDivision.id}}/editar/"><i class="glyphicon glyphicon-pencil"></i></a>
+                      {% endif %}
+                      {% if perms.college.delete_materiadivision %}
+	                     <a data-original-title="Eliminar" data-placement="top" class="btn btn-danger btn-sm tooltips" data-toggle="modal" href="#m{{materiaDivision.id}}"><i class="glyphicon glyphicon-trash"></i></a>
+                      {% endif %}
+	                </td>
+	                </tr>
+	                <!-- Modal -->
+                    <div class="modal fade" id="m{{alumno.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Eliminar Materia Division</h4>
+                                </div>
+                                <div class="modal-body">
+
+                                <p>¿Esta seguro que desea eliminar la materia division <strong>{{materiaDivision}}</strong>?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>
+                                    <button id="{{materiaDivision.id}}" href="/colegio/materiaDivision/{{materiaDivision.id}}/eliminar/" class="btn btn-danger eliminar" type="submit"> Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- modal -->
+	            {% endfor %}
+              </tbody>
+            </table>
+            {% if is_paginated %}
+                <div class="pagination">
+                    <span class="page-links">
+                        {% if page_obj.has_previous %}
+                            <a href="/colegio/materiaDivision?page={{ page_obj.previous_page_number }}">Anterior</a>
+                        {% endif %}
+                        <span class="page-current">
+                            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                        </span>
+                        {% if page_obj.has_next %}
+                            <a href="/colegio/materiaDivision?page={{ page_obj.next_page_number }}"> Siguiente</a>
+                        {% endif %}
+                    </span>
+                </div>
+            {% endif %}
+          </div>
+  </div>
+{% endblock %}
+{% block extra_scripts %}
+	<!-- Script para eliminar -->
+	<script src="{% static 'js/college/eliminar.js' %}"></script>
+  <script src="{% static 'js/college/orden-tabla.js' %}"></script>
+	<script>
+    $('#gestion-profesores').addClass('current');
+		$('#materiasdivisiones').addClass('current');
+	</script>
+{% endblock %}

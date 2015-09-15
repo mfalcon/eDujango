@@ -1,0 +1,45 @@
+<html>
+
+
+
+<head>
+    <title>Titulo</title>
+    <style>
+        @page jorge{
+            size: a4 portrait;
+            @frame content_frame {
+                left: 120cm;
+                bottom: 30cm;
+                top: 140cm;
+                right: 15cm;
+                -pdf-frame-border: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <p>{{ fecha|date:"d/m/Y" }}</p>
+    <p>{{ student.responsable_set.all.0 }}</p>
+    <p>{{ student.domicilio }}</p>
+
+    <!--Detalles-->
+    <ul>
+    {% for service in services %}
+        <li>{{ service.tipo }}                                <!--{{ service.importe }}--></li>
+    {% endfor %}
+    </ul>
+
+    {% if comentarios %}
+        <p>{{ comentarios }}</p>
+    {% endif %}
+    {% comment %}
+    {% if invoice %}
+    {% elif receipt %}
+    {% endif %}
+    {% endcomment %}
+
+    <!--Total-->
+    <p>{{ pago.abona }}</p>
+</body>
+</html>

@@ -1,0 +1,112 @@
+{% extends 'new/base.html' %}
+{% load staticfiles %}
+{% block title %}Pagos{% endblock %}
+{% block breadcumb %}
+  <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'jardin' %}">Inicio</a>
+  </li>
+  <li>
+    <i class="icon-group"></i>
+    <a href="#">Gestión de Alumnos</a>
+  </li>
+  <li class="current">    
+    <a href="#">Pagos</a>
+  </li>
+{% endblock %}
+{% block content %}
+  <div class="col-md-12">
+    <div class="btn-group">
+      {% if perms.finance.add_pago %}
+        <button onclick="window.location.href='{% url 'pago-al-jardin-nuevo' %}'" class="btn btn-lg">
+            Agregar Nuevo <i class="icon-plus"></i>
+        </button>
+      {% endif %}
+    </div>
+		<div class="btn-group pull-right">
+		    <form action="{% url 'pagos-al-jardin' %}" method="GET">
+		        <input type="text" name="terms" class="form-control" placeholder="Buscar"/>
+            <i class="icon-search field-icon"></i>
+		    </form>
+		</div>
+		<br><br>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Alumno</th>
+                  <th>Responsable</th>
+                  <th>Abona</th>
+                  <th>Fecha</th>
+                  <th>Comentarios</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+              	{% for pago in object_list %}
+	                <tr id="f{{pago.id}}">
+	                  <td>{{pago.alumno}}</td>
+	                  <td>{{pago.responsable}}</td>
+                    <td>{{pago.abona}}</td>
+                    <td>{{pago.fecha}}</td>
+                    <td>{{pago.comentarios}}</td>
+	                  <td>
+	                     <a data-original-title="Detalle" data-placement="top" data-toggle="tooltip" class="btn btn-info btn-sm tooltips" href="{% url 'pago-al-jardin-detail' pago.pk %}"><i class="glyphicon glyphicon-eye-open"></i></a>
+                      {% if perms.finance.change_pago %}
+	                     <a data-original-title="Editar" data-placement="top" data-toggle="tooltip" class="btn btn-success btn-sm tooltips" href="{% url 'pago-al-jardin-update' pago.pk %}"><i class="glyphicon glyphicon-pencil"></i></a>
+                      {% endif %}
+                      {% if perms.finance.delete_pago %}
+	                     <a data-original-title="Eliminar" data-placement="top" class="btn btn-danger btn-sm tooltips" data-toggle="modal" href="#m{{pago.id}}"><i class="glyphicon glyphicon-trash"></i></a>
+                      {% endif %}
+	                </td>
+	                </tr>
+	                <!-- Modal -->
+                    <div class="modal fade" id="m{{pago.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Eliminar Pago</h4>
+                                </div>
+                                <div class="modal-body">
+
+                                <p>¿Esta seguro que desea eliminar el pago <strong>{{pago}}</strong>?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>
+                                    <button id="{{pago.id}}" href="{% url 'pago-al-jardin' pago.pk %}" class="btn btn-danger eliminar" type="submit"> Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- modal -->
+	            {% endfor %}
+              </tbody>
+            </table>
+            {% if is_paginated %}
+                <div class="pagination">
+                    <span class="page-links">
+                        {% if page_obj.has_previous %}
+                            <a href="/pagos/pago?page={{ page_obj.previous_page_number }}">Anterior</a>
+                        {% endif %}
+                        <span class="page-current">
+                            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                        </span>
+                        {% if page_obj.has_next %}
+                            <a href="/pagos/pago?page={{ page_obj.next_page_number }}"> Siguiente</a>
+                        {% endif %}
+                    </span>
+                </div>
+            {% endif %}
+          </div>
+  </div>
+{% endblock %}
+{% block extra_scripts %}
+	<!-- Script para eliminar -->
+	<script src="{% static 'js/college/eliminar.js' %}"></script>
+  <script src="{% static 'js/college/orden-tabla.js' %}"></script>
+	<script>
+    $('#gestion-alumnos').addClass('current');
+		$('#pagos').addClass('current');
+	</script>
+{% endblock %}

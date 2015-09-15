@@ -1,0 +1,16 @@
+{% extends "base_pacc.html" %}
+{% load i18n %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li class="active">
+        <a href="#">Logout</a>
+    </li>
+</ul>
+{% endblock %}
+
+
+{% block main_content %}
+<h2>{% trans "Su cuenta ha sido cerrada" %}</h2>
+<a href="/accounts/login">Log in</a>
+{% endblock %}

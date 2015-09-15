@@ -1,0 +1,22 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Jardín Mi Arco Iris - {{ block.super }}{% endblock %}
+
+
+
+{% block main_content %}
+    <div class="row">
+        <div class="span4">
+            <a href="{% url 'salas' %}"><img class="icons" src=/media/images/icons/user_group.png></a>
+            <p class="texto-iconos">Alumnos</p>
+        </div>
+        <div class="span4">
+            <a href="#"><img class="icons" src=/media/images/icons/calendar.png></a>
+            <p class="texto-iconos">Calendario</p>
+        </div>
+        <div class="span4">
+            <a href="#"><img class="icons" src=/media/images/icons/News.png></a>
+            <p class="texto-iconos">Noticias</p>
+        </div>
+    </div>     
+{% endblock %}

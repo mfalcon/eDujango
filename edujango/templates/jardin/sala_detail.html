@@ -1,0 +1,139 @@
+{% extends 'new/base.html' %}
+{% block title %}Detalle {{ sala }}{% endblock %}
+{% block extra_style %}
+  <style type="text/css">
+    .titulo {
+      color: #adadad;
+    }
+  </style>
+{% endblock %}
+{% block breadcumb %}
+  <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'jardin' %}">Inicio</a>
+  </li>
+  <li>
+    <i class="icon-group"></i>
+    <a href="{% url 'salas-jardin' %}">Salas</a>
+  </li>
+  <li class="current">    
+    <a href="#">Detalle</a>
+  </li>
+{% endblock %}
+{% block content %}
+  <div class="row row-bg">
+    <div class="col-sm-6 col-md-3">
+      <div class="statbox widget box box-shadow">
+        <div class="widget-content">
+          <div class="visual green">
+            <i class="icon-chevron-right"></i>
+          </div>
+          <div class="titulo">Sala</div>
+          <div>{{ sala }}, seccion {{ sala.get_seccion_display }}</div>
+        </div>
+      </div> <!-- /.smallstat -->
+    </div> <!-- /.col-md-3 -->
+
+    <div class="col-sm-6 col-md-3">
+      <div class="statbox widget box box-shadow">
+        <div class="widget-content">
+          <div class="visual red">
+            <i class="icon-user"></i>
+          </div>
+          <div class="titulo">Maestra/s:</div>
+          <div>{{ sala.maestra_set.all.0 }}</div>
+        </div>
+      </div> <!-- /.smallstat -->
+    </div> <!-- /.col-md-3 -->
+
+    <div class="col-sm-6 col-md-2">
+      <div class="statbox widget box box-shadow">
+        <div class="widget-content">
+          <div class="visual blue">
+            <i class="icon-calendar"></i>
+          </div>
+          <div class="titulo">Año lectivo</div>
+          <div>{{ sala.anio_lectivo }}</div>
+        </div>
+      </div> <!-- /.smallstat -->
+    </div> <!-- /.col-md-3 -->
+
+    <div class="col-sm-6 col-md-2">
+      <div class="statbox widget box box-shadow">
+        <div class="widget-content">
+          <div class="visual yellow">
+            <i class="icon-group"></i>
+          </div>
+          <div class="titulo">Alumnos</div>
+          <div>{{ cant_alumnos }}</div>
+        </div>
+      </div> <!-- /.smallstat -->
+    </div> <!-- /.col-md-3 -->
+
+    <div class="col-sm-6 col-md-2">
+      <div class="statbox widget box box-shadow">
+        <div class="widget-content">
+          <div class="visual red">
+            <i class="icon-list-ul"></i>
+          </div>
+          <div class="titulo">Vacantes</div>
+          <div>{{ vacantes }}</div>
+        </div>
+      </div> <!-- /.smallstat -->
+    </div> <!-- /.col-md-3 -->
+  </div>
+ 
+  <div class="row">
+    <div class="col-md-6">
+      <div class="list-group">
+        <li class="list-group-item list-group-header">
+          <span class="badge">{{ varones|length }}</span>Varones
+        </li>
+        {% for st in varones %}
+        <a href="{% url 'alumno-jardin-detail' st.id %}" class="list-group-item basic-alert">{{ st.alumno.get_full_name }}</a>
+        {% endfor %}
+      </div>
+    </div> <!-- /.col-md-6 -->
+
+    <div class="col-md-6">
+      <div class="list-group">
+        <li class="list-group-item list-group-header">
+          <span class="badge">{{ nenas|length }}</span>Nenas
+        </li>
+        {% for st in nenas %}
+        <a href="{% url 'alumno-jardin-detail' st.id %}" class="list-group-item basic-alert">{{ st.alumno.get_full_name }}</a>
+        {% endfor %}
+      </div>
+    </div> <!-- /.col-md-6 -->
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="list-group">
+        <li class="list-group-item list-group-header">
+          Lista de espera
+        </li>
+        {% if en_espera %}
+          {% for st in en_espera %}
+            <a href="{% url 'alumno-jardin-detail' st.id %}" class="list-group-item basic-alert">{{forloop.counter }}. {{ st.alumno.get_full_name }}</a>
+          {% endfor %}
+        {% else %}
+          <p> No hay chicos en la lista de espera.</p>
+      {% endif %}
+      </div>
+    </div> <!-- /.col-md-6 -->
+  </div>
+
+
+  
+
+
+  
+    
+{% endblock %}
+{% block extra_scripts %}
+    <script>
+      $('#gestion-alumnos').addClass('current');
+      $('#salas').addClass('current');
+    </script>
+{% endblock %}

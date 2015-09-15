@@ -1,0 +1,14 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Generar sueldos - {{ block.super }}{% endblock %}
+
+{% block main_content %}
+
+    {% if not ya_generados %}
+        <p>Los pagos mensuales se han generado, gracias.</p>
+    {% else %}
+        <p>Los pagos mensuales ya se habían generado, gracias.</p>
+    {% endif %}
+
+{% endblock %}   
+

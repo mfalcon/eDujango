@@ -1,0 +1,45 @@
+{% extends "base_website.html" %}
+
+{% load tagging_tags %}
+{% load coltrane_tags %}
+
+
+{% block title %}Novedades{% endblock %}
+
+{% block content %}
+  <div id="main" class="round_8 clearfix">
+    <div class="red page_title round_6">
+        <h1 class="replace">Novedades</h1>
+    </div>
+    <div class="full">
+      {% get_latest_content coltrane.entry 3 as latest_entries %}
+    
+    {% for entry in latest_entries %}      
+      <h2>{{ entry.title }}</h2>
+      <p>Publicada el día {{ entry.pub_date|date:"j F, Y" }}</p>
+      {% if entry.imagen %}
+        <div style="width: 50%; float:left;">
+      {% else %}
+        <div>
+      {% endif %}
+        {% if entry.excerpt_html %}
+          {{ entry.excerpt_html|safe }}
+        {% else %}
+          {{ entry.body_html|truncatewords_html:"10"|safe }}
+        {% endif %}
+      </div>
+      {% if entry.imagen %}
+          <img width="450" src="{{ entry.imagen.url }}">
+      {% endif %}
+
+      <p><a href="{{ entry.get_absolute_url }}">Leer entrada completa...</a></p>
+    {% endfor %}    
+     
+    </div>
+    <div class="clear"></div>
+ </div>
+     
+{% endblock %}
+
+
+

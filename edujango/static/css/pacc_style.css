@@ -1,0 +1,112 @@
+/* base_pacc.html */
+#logo {
+    heigth:150px;
+    width:250px;
+}
+#header {
+    background-color: #FFF;
+}
+.separator {
+    border-top: 1px solid #D9302B;
+}
+/* negradas */
+#user-tools {
+    color: #DD4814;
+}
+#header a:link, #header a:visited {
+    color: #961603;
+}
+
+/*index.html*/
+.texto-iconos {
+    text-align: left;
+    font-weight: bold;
+    font-size: 18px;
+    padding-left: 45px;
+    color: #F35A31;
+}
+.icons {
+  height:150px;
+  width:150px;
+}
+.admin-icons {
+  height:50px;
+  width:50px;
+}
+.bar {
+    color: white;
+    font-size:18px;
+}
+.pagination {
+    text-align: center;
+}
+/*informe_alumno*/
+.inf {
+    font-weight: bold;
+}
+.texto-inf{
+    background-color: #F7F2F3;
+}
+.informe {
+    font-size: 18px;
+}
+/* cashflow */
+.ingreso{color:green;}
+.gasto{color:red;}
+
+/* admin index */
+.menu,.menu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.menu {
+    width: 400px;   
+}
+
+.menu li {
+    margin: 0;
+    margin-bottom:15px;
+    padding: 0;
+    list-style: none;
+    vertical-align:middle;
+}
+
+.menu img {
+    vertical-align: middle;
+    padding-right: 5px;
+    }
+
+.menu a {
+    display: block;
+    padding: 2px 5px;
+    color: #5B80B2;
+    text-decoration: none;
+    font-size:12px; 
+    font-weight:bold;
+}
+
+.menu a:hover {
+    color: #036;
+}
+
+.menu a:focus {
+      outline: 0;
+    }
+
+.menu ul li {
+    width:100%;
+    margin-bottom:0;
+    margin-left: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.menu ul a {
+}
+
+.hidden {
+    display: none;
+}
+

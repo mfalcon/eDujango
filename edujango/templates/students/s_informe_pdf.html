@@ -1,0 +1,26 @@
+<html>
+<head>
+    <style>
+        .inf {
+            font-weight: bold;
+        }
+        #logo {
+            heigth:150px;
+            width:250px;
+        }
+    </style>
+</head>
+<body>
+    <img id="logo" src="/media/images/logo/logo2.png"></a> <!--ver como cargar imagen-->
+    <hr />
+    <br />
+    <p><span class="inf">Alumno:</span> {{ i.alumno.get_full_name }}</p>
+    <p><span class="inf">Título:</span> {{ i.titulo }}</p>
+    <p><span class="inf">Maestra/s:</span> {{ i.maestra.get_full_name }}</p>
+    <p><span class="inf">Fecha:</span> {{ i.fecha }}</p>
+    <p><span class="inf">Informe:</span></p>
+    <p>{{ i.texto }}</p>
+
+</body>
+</html>
+    

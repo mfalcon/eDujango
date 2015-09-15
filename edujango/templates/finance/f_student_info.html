@@ -1,0 +1,108 @@
+{% extends 'base_pacc.html' %}
+{% comment %}{% extends "base_pacc.html" %}{% endcomment %}
+
+{% block title %}Situacion financiera del alumno - {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Inicio</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'f_index' %}">Finanzas</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'f_students' %}">Alumnos</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="#">Situacion financiera</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main_content %}
+<div class="row">
+    <div class="span4 offset8">
+        <a id="realizar-pago" >Realizar pago</a> |
+        <a id="realizar-pago-unico" >Agregar pago unico</a>
+    </div>
+</div>
+<div class="row">
+    <div class="span4">
+            <h2>Alumno {{ student.get_full_name }}:</h2>
+
+            <br />
+
+            {% if st_debt == 0 %}
+                <p>El alumno no debe nada en estos momentos.</p>
+            {% else %}
+            <p>Deuda actual:
+            <ul>
+                <li>Cuotas ${{ st_debt.0 }}</li>
+                <li>Otros ${{ st_debt.1 }}</li>
+                </ul>
+            </p>
+            {% endif%}
+
+            {% if unpaid_unicos %}
+                <p>Pagos adeudados:</p>
+                <ul>
+                {% for uu in unpaid_unicos %}
+                    <li>
+                        <p>Tipo: {{ uu.tipo.get_tipo_display }}</p>
+                        <p>Deuda actual: {{ uu.deuda }}</p>
+                        <p>Importe original: {{ uu.importe }}</p>
+                        <p>Fecha: {{ uu.fecha }}</p>
+                    </li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if unpaid_cuotas %}
+                <p>Cuotas adeudadas:</p>
+                <ul>
+                {% for uc in unpaid_cuotas %}
+                    <li>
+                        <p>Deuda actual: {{ uc.deuda }}</p>
+                        <p>Importe original: {{ uc.importe }}</p>
+                        <p>Fecha: {{ uc.fecha }}</p>
+                    </li>
+                </ul>
+                {% endfor %}
+            {% endif %}
+            <br />
+            <p>Últimos pagos:</p>
+            {% if st_last_payments %}
+                {% for payment in st_last_payments %}
+                    <p><span class="inf">Fecha:</span> {{ payment.fecha }}</p>
+                    <p><span class="inf">Monto:</span> ${{ payment.abona }}</p>
+                    <p><span class="inf">Responsable:</span> {{ payment.responsable }}</p>
+                    {% if payment.comentarios %}
+                    <p><span class="inf">Comentarios:</span> {{ payment.comentarios }}</p>
+                    {% endif %}
+                    {% comment %}
+                    <a href={% url f_mod_pago payment.id %}>Modificar</a> |
+                    <a href="#">Eliminar</a>
+                    {% endcomment %}
+                    <hr />
+                {% endfor %}
+            {% else %}
+                <p>Todavía no se han realizado pagos.</p>
+            {% endif %}
+    </div>
+    <br>
+    <div id="container-form-pago" class="span4">
+
+        
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#realizar-pago').click(function() {
+        $("#container-form-pago").load("{% url 'f_new_payment' student.id %}");
+    });
+    $('#realizar-pago-unico').click(function() {
+        $("#container-form-pago").load("{% url 'f_new_unique'  student.id %}");
+    });
+</script>
+{% endblock %}

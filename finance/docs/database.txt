@@ -1,0 +1,10 @@
+- La cuota deberia generarse a partir de los SS's del Alumno. El importe no deberia poder ingresarse en cuota.
+re: OK, caso en que se agrega cuota despues de que se han generado.
+
+- Clase Persona con datos generales.
+
+- Metodos de clase:
+
+	. Cuota: get_importe = SUM(servSusc)
+	. Alumno: get_deuda
+

@@ -1,0 +1,107 @@
+{% load bootstrap3 %}
+    <div class="row">
+        <div class="span8 offset2">
+            <h2 class="page-header">Agregar pago</h2>
+            {% comment %}
+            <div class="row">
+                <div class="span3 offset9">
+                    <a href="{% url 'f_student_report' st.id %}">Crear Factura</a>
+                </div>
+            </div>
+            {% endcomment%}
+<!--
+    <div class="row">
+        <div class="span8 offset2">
+            <h3>Situación financiera</h3>
+            <p>{{ st.get_full_name }}:
+
+            {% if st_debt == 0 %}
+                <p>El alumno no debe nada en estos momentos.</p>
+            {% else %}
+            <p class="inf">Deuda:</p>
+            <p>Cuotas  $ {{ st_debt.0 }}</p>
+            <p>Otros  $ {{ st_debt.1 }}</p>
+            {% endif%}
+
+            {% if unpaid_unicos %}
+                <p>Pagos adeudados:</p>
+                <ul>
+                {% for uu in unpaid_unicos %}
+                    <li>
+                        <p>Tipo: {{ uu.tipo.get_tipo_display }}</p>
+                        <p>Deuda actual: {{ uu.deuda }}</p>
+                        <p>Importe original: {{ uu.importe }}</p>
+                        <p>Fecha: {{ uu.fecha }}</p>
+                    </li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if unpaid_cuotas %}
+                <p>Cuotas adeudadas:</p>
+                <ul>
+                {% for uc in unpaid_cuotas %}
+                    <li>
+                        <p>Deuda actual: {{ uc.deuda }}</p>
+                        <p>Importe original: {{ uc.importe }}</p>
+                        <p>Fecha: {{ uc.fecha }}</p>
+                    </li>
+                </ul>
+                {% endfor %}
+            {% endif %}
+-->         <p id="p"></p>
+            <form id="create" method="POST" action="{% url 'f_new_payment' st.id %}">{% csrf_token %}
+                    <!--<ul id="list">-->
+                    {% bootstrap_form form %}
+                    <!--</ul>-->
+                <input id="boton_aceptar" type="submit" value="Enviar">
+                
+            </form>
+        </div>
+    </div>
+    
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            function block_form() {
+                $('textarea').attr('disabled', 'disabled');
+                $('input').attr('disabled', 'disabled');
+            }
+
+            function unblock_form() {
+                $('textarea').removeAttr('disabled');
+                $('input').removeAttr('disabled');
+                $('.errorlist').remove();
+            }
+
+            // prepare Options Object for plugin
+            var options = {
+                beforeSubmit: function(form, options) {
+                    // return false to cancel submit
+                    block_form();
+                },
+                success: function(resp) {
+                    window.open(
+                      resp[0].pdf,
+                      '_blank' 
+                    );
+                    window.location.href = resp[0].success
+
+                },
+                error:  function(resp) {
+                    unblock_form();
+                    // render errors in form fields
+                    var errors = JSON.parse(resp.responseText);
+                    for (error in errors) {
+                        console.log(error);
+                        //var id = '#id_' + error;
+                        //$(id).parent('p').prepend(errors[error]);
+                        $('#p').prepend(errors[error]);
+                    }
+                    
+                }
+            };
+
+            $('#create').ajaxForm(options);
+        });
+    </script>

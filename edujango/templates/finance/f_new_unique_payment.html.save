@@ -1,0 +1,34 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Agregar pago unico- {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Inicio</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'f_index' %}">Finanzas</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'f_students' %}">Alumnos</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="#">Agregar pago unico</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main_content %}
+<div class="row">
+    <div class="span8 offset2">
+        <h2>Nuevo pago unico para: {{ st.get_full_name }}</h2>
+
+        <form method="POST" action="" class="span-20 prepend-2 append-2 last">{% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Enviar" />
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load tagging_tags %}
+
+{% block title %}Open Unit - Blog{% endblock %}
+
+{% block content %}
+   <div id="columnacentral">
+    <h1>{{ tag.name }}</h1>
+    
+    {% for entry in object_list %}
+      <h2>{{ entry.title }}</h2>
+      <p>Publicada el día {{ entry.pub_date|date:"j F, Y" }}</p>
+      {% if entry.excerpt_html %}
+        {{ entry.excerpt_html|safe }}
+      {% else %}
+        {{ entry.body_html|truncatewords_html:"10"|safe }}
+      {% endif %}
+      <p class="readmore"><a href="{{ entry.get_absolute_url }}">Leer entrada completa y comentarios...</p>
+    {% endfor %}
+   <div> </div>   
+     
+{% endblock %}

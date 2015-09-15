@@ -1,0 +1,14 @@
+[
+{
+    "pk": 1, 
+    "model": "students.sala", 
+    "fields": {
+        "capacidad": 20, 
+        "fecha_inicio": "2014-08-16", 
+        "anio_lectivo": 2014, 
+        "sala": 0, 
+        "seccion": 0, 
+        "turno": 0
+    }
+}
+]

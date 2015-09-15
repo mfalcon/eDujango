@@ -1,0 +1,44 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Detalle gasto - {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'f_index' %}">Finanzas</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'f_gastos' %}">Gastos</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="#">Detalle Gasto</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main_content %}
+
+    <h2>Detalle de gasto</h2>
+    <br />
+    <br />
+<div class="row">
+    <div class="span8 offset2">
+        <p><span class="inf">Fecha:</span> {{ g.fecha }}</p>
+        <p><span class="inf">Importe:</span> {{ g.importe }}</p>
+        <p><span class="inf">Tipo:</span> {{ g.get_tipo }}</p>
+        <p><span class="inf">Pago:</span> {{ g.is_pago }}</p>
+        {% if g.comentarios %}
+            <p><span class="inf">Comentarios:</span> {{ g.comentarios }}</p>
+        {% endif %}
+        {% comment %}
+        <a href="{% url 'e_modificar_gasto' g.id %}">Modificar</a> |
+        <a href="#">Eliminar</a>
+        {% endcomment %}
+    </div>
+</div>
+
+
+{% endblock %}

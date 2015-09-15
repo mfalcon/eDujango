@@ -1,0 +1,71 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<!-- Meta info begin-->
+<title>Mi Arco Iris - {% block title %}{% endblock %}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="robots" content="index, follow" />
+<!-- Meta info end-->
+<link rel="stylesheet" type="text/css" href="{% static 'website/css/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'website/css/default.css' %}" />
+<link rel="shortcut icon" href="{% static 'website/img/favicon2.ico' %}" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'website/js/cufon-yui.js' %}"></script>
+<script type="text/javascript" src="{% static 'website/js/Museo.font.js' %}"></script>
+<script type="text/javascript" src="{% static 'website/js/Museo_Sans.font.js' %}"></script>
+<script type="text/javascript" src="{% static 'website/js/supersized.3.1.3.core.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'website/js/superfish-compile.js' %}"></script>
+<script type="text/javascript" src="{% static 'website/js/jquery.colorbox.js' %}"></script>
+<script type="text/javascript" src="{% static 'website/js/p2.js' %}"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<link rel="stylesheet" href="{% static 'schedule/css/schedule.css' %}" type="text/css" media="screen" />
+<link rel="stylesheet" href="{% static 'schedule/css/jquery-ui.css' %}" type="text/css" media="screen" />
+<script type="text/javascript" src="{% static 'schedule/js/jquery-ui.js' %}"></script>
+<body>
+<div id="content-wrapper"> 
+    
+    <!-- Container begin -->
+    <div id="container"> 
+        <!-- Header begin-->
+        <div id="header" class="clearfix">
+            <div id="logo"> <a href="{% url 'home' %}"><img src="{% static 'website/img/logo.png' %}" alt="logo" /></a> </div>
+            
+            <!-- Navigation start -->
+            <ul class="sf-menu">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="/weblog/">Novedades</a></li>
+                <li><a href="/schedule/calendar/month/calendario/">Calendario</a></li>
+                <li><a href="{% url 'institucional' %}">Institucional</a></li>
+                <li><a href="{% url 'actividades' %}">Actividades</a></li>
+                <li><a href="{% url 'fotos' %}">Fotos</a></li>
+                <li><a href="{% url 'salas' %}">Salas</a></li>
+                <!--<li><a href="./contacto.html">Contacto</a></li>-->
+            </ul>
+            <!-- Navigation end --> 
+            
+        </div>
+        <!-- Header end --> 
+        
+        <!-- Main begin-->
+        {% block content %}
+        {% endblock %}
+        <!-- Main end --> 
+        <!-- Footer begin -->
+        <div id="footer" class="round_8 clearfix">
+            
+            <div id="footer-bottom">
+                <div id="footer-note" class="right">Jardín de infantes Mi Arco Iris - DIPREGEP N° 5445 - Dirección: Echeverría 5861, Villa Bosch - Teléfono: 4844-0628 - E-mail: jardinmiarcoiris@yahoo.com.ar</div>
+            </div>
+        </div>
+        <!-- Footer end --> 
+        
+    </div>
+    <!-- Container end --> 
+</div>
+<!--Full background-->
+<div id="supersized"></div>
+</body>
+</html>

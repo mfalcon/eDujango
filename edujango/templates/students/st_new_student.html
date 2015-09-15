@@ -1,0 +1,111 @@
+{% extends "base_pacc.html" %}
+ 
+{% block title %}Agregar alumno - {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'st_index' %}">Alumnos</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="#">Nuevo alumno</a>
+    </li>
+</ul>
+{% endblock %}
+
+
+{% block main_content %}
+   
+    <div class="row">
+        <div class="span8 offset2">
+            <form method="POST" action="" class="span-20 prepend-2 append-2 last">{% csrf_token %}
+                <fieldset>
+                    <legend>Información Personal</legend>
+                {{ student_form.as_p }}
+                </fieldset>
+                <input type="submit" value="Aceptar" />
+            </form>
+        </div>
+    </div>
+    
+    {% comment %} 
+        <form id="create" method="POST" action="" class="span-16 prepend-4 append-4 last">{% csrf_token %}
+            <fieldset>
+                <legend>Información Personal:</legend>
+                <div class="fm-req">
+                    <label for="id_apellido">Apellido:</label>
+                    <input type="text" maxlength="30" name="last_name" id="id_last_name">
+                </div>
+                <div class="fm-req">
+                    <label for="id_nombre1">Primer nombre:</label>                
+                    <input type="text" maxlength="30" name="first_name" id="id_first_name">
+                </div>
+                <div class="fm-opt">
+                    <label for="id_nombre2">Segundo nombre:</label>
+                    <input id="id_nombre2" type="text" maxlength="30" name="second_name">
+                </div>
+                <div class="fm-req">
+                    <label for="id_tipo_doc">Tipo documento:</label>
+                    <select id="id_tipo_doc" name="tipo_doc">
+                        <option selected="selected" value="0">DNI</option>
+                    </select>
+                </div>
+                <div class="fm-req">
+                    <label for="id_num_doc">Número documento:</label>
+                    <input type="text" id="id_num_doc" name="num_doc">
+                    <span class="helptext">Ingresar sólo los números sin puntos</span>
+                </div>
+                <div class="fm-req">
+                    <label for="id_sexo">Sexo:</label>
+                    <select id="id_sexo" name="sexo">
+                        <option selected="selected" value="">Seleccione un sexo</option>
+                        <option value="0">Masculino</option>
+                        <option value="1">Femenino</option>
+                    </select>
+                </div>
+                <div class="fm-req">
+                    <label for="id_fechaNac">Fecha de nacimiento:</label>
+                    <input type="text" id="id_fechaNac" name="fechaNac">
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Dirección</legend>
+                <div class="fm-req">
+                    <label for="id_domicilio">Domicilio:</label>
+                    <input type="text" maxlength="50" name="domicilio" id="id_domicilio">
+                </div>
+                <div class="fm-req">
+                    <label for="id_localidad">Localidad:</label>
+                    <input type="text" maxlength="20" name="localidad" id="id_localidad">
+                </div>
+                <div class="fm-req">
+                    <label for="id_telefono">Telefono:</label>
+                    <input type="text" id="id_telefono" name="telefono">
+                    <span class="helptext">Ingresar sólo los números sin puntos</span>
+                </div>
+                <div class="fm-opt">
+                    <label for="id_email">Email:</label>
+                    <input type="text" maxlength="75" name="email" id="id_email">
+                </div>
+                <div class="fm-req">
+                    <label for="id_sala">Sala:</label>
+                    <select id="id_sala" name="sala">
+                        <option selected="selected" value="">Seleccione una sala</option>
+                        <option value="1">Roja, turno mañana</option>
+                        <option value="2">Rosa, turno tarde</option>
+                        <option value="3">Celeste, turno mañana</option>
+                        <option value="4">Verde, turno tarde</option>
+                        <option value="5">Naranja, turno tarde</option>
+                    </select>
+                </div>
+            </fieldset>
+            <div><input type="submit" value="Aceptar"></div>
+        </form>
+    {% endcomment %}
+
+
+
+{% endblock %}

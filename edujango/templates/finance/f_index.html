@@ -1,0 +1,38 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Finanzas - {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="#">Finanzas</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main_content %}
+{% if user.empleado.puesto == 3 %}
+
+    <h2>Por favor, seleccione una opción:</h2>
+    <ul>
+        <li><a href="{% url 'f_students' %}">Alumnos</a></li>
+        <li><a href="{% url 'f_empleados' %}">Empleados</a></li>
+        <li><a href="{% url 'f_gastos' %}">Gastos</a></li>
+        <li><a href="{% url 'f_cashflow' %}">Cashflow</a></li>    
+    </ul> 
+{% endif %}
+
+{% if user.empleado.puesto == 1 %}
+
+    <h2>Por favor, seleccione una opci&oacute;n:</h2>
+    <ul>
+        <li><a href="{% url 'f_students' %}">Alumnos</a></li>
+        <li><a href="{% url 'f_gastos' %}">Gastos</a></li>
+        <li><a href="{% url 'f_cashflow' %}">Cashflow</a></li>    
+    </ul> 
+{% endif %}
+
+{% endblock %}   

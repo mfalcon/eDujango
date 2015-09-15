@@ -1,0 +1,14 @@
+[
+  {
+    "model": "efinance.client",
+    "pk": 1,
+    "fields": {
+      "domain_url": "127.0.0.1",
+      "schema_name":"public",
+      "nombre": "edujango",
+      "paid_until": "2015-01-01",
+      "on_trial": "False",
+      "created_on": "2014-06-04"
+    }
+  }
+]

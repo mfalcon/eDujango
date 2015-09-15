@@ -1,0 +1,40 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Jardín Mi Arco Iris - {{ block.super }}{% endblock %}
+
+
+
+{% block main_content %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="#">Home</a> <span class="divider">/</span>
+        </li>
+        <li>
+            <a href="#">Informes</a> <span class="divider">/</span>
+        </li>
+        <li class="active">
+            <a href="#">Informe</a>
+        </li>
+    </ul>
+    <div class="row">
+        <h2>Informe del alumno Emiliano Fiore</h2>
+        <br />
+        <div class="span4">
+            <p><span class="inf">Maestra:</span> Sanguín, Verónica</p>
+            <p><span class="inf">Fecha:</span> 9 de Abril de 2012</p>
+            <p><span class="inf">Nombre:</span> 1° cuatrimestre 2012</p>
+            <p><span class="inf">Sala:</span> Verde</p>
+            <p><span class="inf">Turno:</span> Mañana</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span4 offset2">
+            <form>
+                <label class="control-label" for="textarea">Textarea</label>
+                <textarea class="input-xlarge" id="textarea" rows="18">
+                    Se porta muy bien
+                </textarea>
+            </form>
+        </div>
+    </div>     
+{% endblock %}

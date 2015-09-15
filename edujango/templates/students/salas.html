@@ -1,0 +1,48 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Salas - {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'st_students_list' %}">Alumnos</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="{% url 'st_salas' %}">Listado de salas</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main_content %}
+<h2>Listado de salas</h2>
+<br />
+<br />
+<div class="row">
+        <div class="span8 offset2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                      <th>Sala</th>
+                      <th>Turno</th>
+                      <th>Varones</th>
+                      <th>Nenas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sala in salas %}
+                    <tr>
+                        <td><a href="{% url 'st_info_sala' sala.0.id %}">{{ sala.0.get_sala_display }}</a></td>
+                        <td><a href="{% url 'st_info_sala' sala.0.id %}">{{ sala.0.get_turno_display }}</a></td>
+                        <td>{{ sala.1 }}</td>
+                        <td>{{ sala.2 }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>    
+{% endblock %}

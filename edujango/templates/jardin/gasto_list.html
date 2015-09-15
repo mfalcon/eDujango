@@ -1,0 +1,106 @@
+{% extends 'new/base.html' %}
+{% load staticfiles %}
+{% block title %}Gastos{% endblock %}
+{% block breadcumb %}
+  <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'jardin' %}">Inicio</a>
+  </li>
+  <li>
+    <i class="icon-group"></i>
+    <a href="#">Gestión de Finanzas</a>
+  </li>
+  <li class="current">    
+    <a href="#">Gastos</a>
+  </li>
+{% endblock %}
+{% block content %}
+	<div class="col-md-12">
+    <div class="btn-group">
+      {% if perms.efinance.add_gasto %}
+        <button onclick="window.location.href='{% url 'gasto-jardin-nuevo' %}'" class="btn btn-lg">
+            Agregar Nuevo <i class="icon-plus"></i>
+        </button>
+      {% endif %}
+    </div>
+		<br><br>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Tipo</th>
+                  <th>Importe</th>
+                  <th>Fecha</th>
+                  <th>Pago</th>
+                  <th>Comentarios</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+              	{% for gasto in object_list %}
+	                <tr id="f{{gasto.id}}">
+	                  <td>{{gasto.get_tipo_display}}</td>
+	                  <td>{{gasto.importe}}</td>
+                    <td>{{gasto.fecha}}</td>
+                    <td>{{gasto.pago}}</td>
+                    <td>{{gasto.comentarios}}</td>
+	                  <td>
+	                     <a data-original-title="Detalle" data-placement="top" data-toggle="tooltip" class="btn btn-info btn-sm tooltips" href="{% url 'gasto-jardin-detail' gasto.pk %}"><i class="glyphicon glyphicon-eye-open"></i></a>
+                      {% if perms.efinance.change_honorarios %}
+	                     <a data-original-title="Editar" data-placement="top" data-toggle="tooltip" class="btn btn-success btn-sm tooltips" href="{% url 'gasto-jardin-update' gasto.pk %}"><i class="glyphicon glyphicon-pencil"></i></a>
+                      {% endif %}
+                      {% if perms.efinance.delete_honorarios %}
+	                     <a data-original-title="Eliminar" data-placement="top" class="btn btn-danger btn-sm tooltips" data-toggle="modal" href="#m{{gasto.id}}"><i class="glyphicon glyphicon-trash"></i></a>
+                      {% endif %}
+	                </td>
+	                </tr>
+	                <!-- Modal -->
+                    <div class="modal fade" id="m{{gasto.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Eliminar Gasto</h4>
+                                </div>
+                                <div class="modal-body">
+
+                                <p>¿Esta seguro que desea eliminar el gasto <strong>{{gasto}}</strong>?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>
+                                    <button id="{{gasto.id}}" href="{% url 'gasto-jardin' gasto.pk%}" class="btn btn-danger eliminar" type="submit"> Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- modal -->
+	            {% endfor %}
+              </tbody>
+            </table>
+            {% if is_paginated %}
+                <div class="pagination">
+                    <span class="page-links">
+                        {% if page_obj.has_previous %}
+                            <a href="/gestion-finanzas/gastos?page={{ page_obj.previous_page_number }}">Anterior</a>
+                        {% endif %}
+                        <span class="page-current">
+                            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                        </span>
+                        {% if page_obj.has_next %}
+                            <a href="/gestion-finanzas/gastos?page={{ page_obj.next_page_number }}"> Siguiente</a>
+                        {% endif %}
+                    </span>
+                </div>
+            {% endif %}
+          </div>
+  </div>
+{% endblock %}
+{% block extra_scripts %}
+	<!-- Script para eliminar -->
+	<script src="{% static 'js/college/eliminar.js' %}"></script>
+  <script src="{% static 'js/college/orden-tabla.js' %}"></script>
+	<script>
+		$('#gastos-jardin').addClass('current');
+    $('#gestion-finanzas').addClass('current');
+	</script>
+{% endblock %}

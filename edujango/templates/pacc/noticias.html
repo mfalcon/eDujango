@@ -1,0 +1,68 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Noticias - {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="#">Noticias</a>
+    </li>
+</ul>
+{% endblock %}
+
+
+{% block main_content %}
+    <div class="row">
+        <div class="span8 offset1">
+            <h1>Noticias</h1>    
+        </div>
+        <div class="span3">
+            <a href="{% url 'nueva_noticia' %}">Agregar noticia</a> |
+            <a href="{% url 'admin_noticias' %}">Modificar noticia</a>
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="row">
+        <div class="span8">
+            <ul class="posts">
+                <h3>Uniformes</h3>
+                <li>Fecha: 24/4/2012</li>
+                <li>Escrita por: Ziliotto, Silvana</li>
+                <br />
+                <p>Los uniformes se venden a $35</p>
+            </ul>
+            <hr />
+            <ul class="posts">
+                <h3>Acto fin de año</h3>
+                <li>Fecha: 24/4/2012</li>
+                <li>Escrita por: Ziliotto, Silvana</li>
+                <br />
+                <p>Los uniformes se venden a $35</p>
+            </ul>
+            <hr />
+            <ul class="posts">
+                <h3>Uniformes</h3>
+                <li>Fecha: 24/4/2012</li>
+                <li>Escrita por: Ziliotto, Silvana</li>
+                <br />
+                <p>Los uniformes se venden a $35</p>
+            </ul>
+        </div>
+        <div class="span3 offset1">
+            <h3>Categorías</h3>
+            <ul>
+                <li><a href="#">Actos</a></li>
+                <li><a href="#">Novedades</a></li>
+                <li><a href="#">Cuotas</a></li>
+                <li><a href="#">Inscripciones</a></li>
+                <li><a href="#">Materiales</a></li>
+            </ul>
+        </div>
+    </div>     
+{% endblock %}

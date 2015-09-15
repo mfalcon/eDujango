@@ -1,0 +1,114 @@
+{% extends 'new/base.html' %}
+{% load staticfiles %}
+{% block title %}Responsables{% endblock %}
+{% block breadcumb %}
+  <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'jardin' %}">Inicio</a>
+  </li>
+  <li>
+    <i class="icon-group"></i>
+    <a href="#">Gestión de Alumnos</a>
+  </li>
+  <li class="current">    
+    <a href="#">Responsables</a>
+  </li>
+{% endblock %}
+{% block page_header %}{% endblock %}
+{% block content %}
+	<div class="col-md-12">
+    <div class="btn-group">
+      {% if perms.finance.add_responsable %}
+        <button onclick="window.location.href='{% url 'responsable-jardin-nuevo' %}'" class="btn btn-lg">
+            Agregar Nuevo <i class="icon-plus"></i>
+        </button>
+      {% endif %}
+    </div>
+		<div class="btn-group pull-right">
+		    <form action="{% url 'responsables-jardin' %}" method="GET">
+		        <input type="text" name="terms" class="form-control" placeholder="Buscar"/>
+            <i class="icon-search field-icon"></i>
+		    </form>
+		</div>
+		<br><br>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Teléfono</th>
+                  <th>Domicilio</th>
+                  <th>Relación</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+              	{% for responsable in object_list %}
+	                <tr id="f{{responsable.id}}">
+	                  <td>{{responsable.first_name}}</td>
+	                  <td>{{responsable.last_name}}</td>
+	                  <td>{{responsable.telefono}}</td>
+	                  <td>{{responsable.domicilio}}</td>
+                    <td>{{responsable.get_relacion_display}}</td>
+	                  
+	                  <td>
+	                     <a data-original-title="Detalle" data-placement="top" data-toggle="tooltip" class="btn btn-info btn-sm tooltips" href="/jardin/responsables/{{responsable.id}}/detalle/"><i class="glyphicon glyphicon-eye-open"></i></a>
+                      {% if perms.college.change_alumnocolegio %}
+	                     <a data-original-title="Editar" data-placement="top" data-toggle="tooltip" class="btn btn-success btn-sm tooltips" href="/jardin/responsables/{{responsable.id}}/editar/"><i class="glyphicon glyphicon-pencil"></i></a>
+                      {% endif %}
+                      {% if perms.college.change_alumnocolegio %}
+	                     <a data-original-title="Eliminar" data-placement="top" class="btn btn-danger btn-sm tooltips" data-toggle="modal" href="#m{{responsable.id}}"><i class="glyphicon glyphicon-trash"></i></a>
+                      {% endif %}
+	                </td>
+	                </tr>
+	                <!-- Modal -->
+                    <div class="modal fade" id="m{{responsable.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Eliminar Responsable</h4>
+                                </div>
+                                <div class="modal-body">
+
+                                <p>¿Esta seguro que desea eliminar responsable <strong>{{responsable}}</strong>?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>
+                                    <button id="{{responsable.id}}" href="/jardin/responsables/{{responsable.id}}/eliminar/" class="btn btn-danger eliminar" type="submit"> Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- modal -->
+	            {% endfor %}
+              </tbody>
+            </table>
+            {% if is_paginated %}
+                <div class="pagination">
+                    <span class="page-links">
+                        {% if page_obj.has_previous %}
+                            <a href="/jardin/responsables?page={{ page_obj.previous_page_number }}">Anterior</a>
+                        {% endif %}
+                        <span class="page-current">
+                            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                        </span>
+                        {% if page_obj.has_next %}
+                            <a href="/jardin/responsables?page={{ page_obj.next_page_number }}"> Siguiente</a>
+                        {% endif %}
+                    </span>
+                </div>
+            {% endif %}
+          </div>
+  </div>
+{% endblock %}
+{% block extra_scripts %}
+	<!-- Script para eliminar -->
+	<script src="{% static 'js/college/eliminar.js' %}"></script>
+  <script src="{% static 'js/college/orden-tabla.js' %}"></script>
+	<script>
+    $('#gestion-alumnos').addClass('current');
+		$('#responsables').addClass('current');
+	</script>
+{% endblock %}

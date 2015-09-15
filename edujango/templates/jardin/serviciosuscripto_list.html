@@ -1,0 +1,108 @@
+{% extends 'new/base.html' %}
+{% load staticfiles %}
+{% block title %}Servicios Suscriptos{% endblock %}
+{% block breadcumb %}
+  <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'jardin' %}">Inicio</a>
+  </li>
+  <li>
+    <i class="icon-group"></i>
+    <a href="#">Gestión de Alumnos</a>
+  </li>
+  <li class="current">    
+    <a href="#">Servicios Suscriptos</a>
+  </li>
+{% endblock %}
+{% block content %}
+	<div class="col-md-12">
+    <div class="btn-group">
+      {% if perms.finance.add_serviciosuscripto %}
+        <button onclick="window.location.href='{% url 'servicio-jardin-nuevo' %}'" class="btn btn-lg">
+            Agregar Nuevo <i class="icon-plus"></i>
+        </button>
+      {% endif %}
+    </div>
+		<div class="btn-group pull-right">
+		    <form action="{% url 'servicios-jardin' %}" method="GET">
+		        <input type="text" name="terms" class="form-control" placeholder="Buscar"/>
+            <i class="icon-search field-icon"></i>
+		    </form>
+		</div>
+		<br><br>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Alumno</th>
+                  <th>Tipo</th>
+                  <th>Importe</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+              	{% for servicio in object_list %}
+	                <tr id="f{{servicio.id}}">
+                    <td>{{servicio.alumno}}</td>
+	                  <td>{{servicio.tipo}}</td>
+	                  <td>{{servicio.importe}}</td>
+	                  <td>
+	                     <a data-original-title="Detalle" data-placement="top" data-toggle="tooltip" class="btn btn-info btn-sm tooltips" href="{% url 'servicio-jardin-detail' servicio.id %}"><i class="glyphicon glyphicon-eye-open"></i></a>
+                      {% if perms.finance.change_serviciosuscripto %}
+	                     <a data-original-title="Editar" data-placement="top" data-toggle="tooltip" class="btn btn-success btn-sm tooltips" href="{% url 'servicio-jardin-update' servicio.id %}"><i class="glyphicon glyphicon-pencil"></i></a>
+                      {% endif %}
+                      {% if perms.finance.delete_serviciosuscripto %}
+	                     <a data-original-title="Eliminar" data-placement="top" class="btn btn-danger btn-sm tooltips" data-toggle="modal" href="#m{{servicio.id}}"><i class="glyphicon glyphicon-trash"></i></a>
+                      {% endif %}
+	                </td>
+	                </tr>
+	                <!-- Modal -->
+                    <div class="modal fade" id="m{{servicio.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Eliminar Sueldo</h4>
+                                </div>
+                                <div class="modal-body">
+
+                                <p>¿Esta seguro que desea eliminar el servicio <strong>{{servicio}}</strong>?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>
+                                    <button id="{{servicio.id}}" href="{% url 'servicio-jardin' servicio.id %}" class="btn btn-danger eliminar" type="submit"> Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- modal -->
+	            {% endfor %}
+              </tbody>
+            </table>
+            {% if is_paginated %}
+                <div class="pagination">
+                    <span class="page-links">
+                        {% if page_obj.has_previous %}
+                            <a href="/gestion-empleados/servicios?page={{ page_obj.previous_page_number }}">Anterior</a>
+                        {% endif %}
+                        <span class="page-current">
+                            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                        </span>
+                        {% if page_obj.has_next %}
+                            <a href="gestion-empleados/servicios?page={{ page_obj.next_page_number }}"> Siguiente</a>
+                        {% endif %}
+                    </span>
+                </div>
+            {% endif %}
+          </div>
+  </div>
+{% endblock %}
+{% block extra_scripts %}
+	<!-- Script para eliminar -->
+	<script src="{% static 'js/college/eliminar.js' %}"></script>
+  <script src="{% static 'js/college/orden-tabla.js' %}"></script>
+	<script>
+		$('#servicios').addClass('current');
+    $('#gestion-alumnos').addClass('current');
+	</script>
+{% endblock %}

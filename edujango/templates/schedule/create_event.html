@@ -1,0 +1,20 @@
+{% extends "schedule/event_form_base.html" %}
+{% load i18n %}
+{% block content %}
+{% block body %}
+<div id="main" class="round_8 clearfix">
+<b>Crear o editar un evento. Todos los campos son requeridos.</b>
+<br/><br/>
+<form action="" method="post">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+  <br/>
+  <input type="submit" value="Guardar">
+  <input type="button" value="Cancelar" onclick="window.location='{{next}}'"/>
+  <input type="hidden" name="next" value="{{next|default:""}}"/>
+</form>
+</div>
+{% endblock %}
+{% endblock %}

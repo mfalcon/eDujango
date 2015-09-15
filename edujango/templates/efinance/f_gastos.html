@@ -1,0 +1,64 @@
+{% extends "base_pacc.html" %}
+ 
+{% block title %}Gastos- {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'f_index' %}">Finanzas</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="#">Gastos</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main_content %}
+    <h2>Gastos</h2>
+    <br />
+    <br />
+<div class="row">
+    <div class="span2 offset10">
+        <a href="{% url 'f_nuevo_gasto' %}">Nuevo gasto</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span8 offset1">
+        {% if gastos %}
+            <table class="table table-stripped">
+                <thead>
+                    <th>Tipo</th>
+                    <th>Fecha</th>
+                    <th>Importe</th>
+                    <th>Pago</th>
+                </thead>
+                <tbody>
+                    {% for g in gastos %}
+                        <tr>
+                        <td><a href="{% url 'f_gasto_info'  g.id %}">{{ g.get_tipo }}</td>
+                        <td>{{ g.fecha }}</td>
+                        <td>{{ g.importe }}</td>
+                        <td>{{ g.is_pago }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No hay gastos actualmente.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_body %}
+<script>
+    $(document).ready(function() {
+        $('#ftab').tableFilter();
+    });
+</script>
+{% endblock %}
+  

@@ -1,0 +1,198 @@
+{% extends 'new/base.html' %}
+{% load staticfiles %}
+{% block title %}Detalle {{ object }}{% endblock %}
+{% block breadcumb %}
+  <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'jardin' %}">Inicio</a>
+  </li>
+  <li>
+    <i class="icon-group"></i>
+    <a href="{% url 'alumnos-jardin' %}">Alumnos</a>
+  </li>
+  <li class="current">    
+    <a href="#">Detalle</a>
+  </li>
+{% endblock %}
+{% block content %}
+        {% if object.foto %}
+            <div class="col-sm-3 col-md-3">
+            	<img class="media-object img-rounded img-responsive"  src="http://placehold.it/350x450" alt="placehold.it/350x250" >
+            </div>
+        {% endif %}
+        <div class="col-sm-8 col-md-8">
+            <blockquote>
+                <p>{{object}}</p> 
+                <small>
+                	<cite title="Source Title">{{object.domicilio}} - {{object.localidad}}, {{object.get_nacionalidad_display}}  
+                		<i class="icon-map-marker"></i>
+                	</cite>
+                </small>
+            </blockquote>
+           
+                <!-- Tabs-->
+                <div class="tabbable tabbable-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab_1_1" data-toggle="tab">Personal</a></li>
+                        <li><a href="#tab_1_2" data-toggle="tab">Familiar</a></li>
+                        <li><a href="#tab_1_3" data-toggle="tab">Académica</a></li>
+                        <li><a href="#tab_1_4" data-toggle="tab">Médica</a></li>
+                        <li><a href="#tab_1_5" data-toggle="tab">Otros</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_1_1">
+                            <p> 
+                                <i class="icon-phone"></i><b> Tel:</b> {{object.telefono}}<br /> 
+                                <i class="icon-chevron-right"></i><b> Tipo de documento:</b> {{object.get_tipo_doc_display}}<br /> 
+                                <i class="icon-chevron-right"></i><b> Número de documento:</b> {{object.num_doc}}<br /> 
+                                <i class="icon-user"></i><b> Sexo:</b> {{object.get_sexo_display}}<br /> 
+                                <i class="icon-calendar"></i><b> Fecha de nacimiento:</b> {{object.fecha_nac}}<br /> 
+                                <i class="icon-chevron-right"></i><b> Sala:</b>
+                                    {% for sala in object.sala.all %}
+                                        {{sala}}
+                                    {% endfor %}    
+                            </p>
+                        </div>
+                        <div class="tab-pane" id="tab_1_2">
+                            <p><b>Responsables</b></p>
+                            <p>
+                                {% for responsable in object.responsables.all %}
+                                    <i class="icon-chevron-right"></i><b> Nombre y Apellido:</b> {{responsable.get_full_name}}<br /> 
+                                    <i class="icon-chevron-right"></i><b> Número de documento:</b> {{responsable.num_doc}}<br /> 
+                                    <i class="icon-chevron-right"></i><b> Relación:</b> {{responsable.get_relacion_display}}<br /> 
+                                    <hr>
+                                {% endfor %}
+                            </p>
+                            <p><b>Autorizados</b></p>
+                            <p>
+                                {% for autorizado in object.autorizados.all %}
+                                    <i class="icon-chevron-right"></i><b> Nombre y Apellido:</b> {{autorizado.get_full_name}}<br /> 
+                                    <i class="icon-chevron-right"></i><b> Número de documento:</b> {{autorizado.num_doc}}<br /> 
+                                    <i class="icon-chevron-right"></i><b> Relación:</b> {{autorizado.get_relacion_display}}<br /> 
+                                    <hr>
+                                {% endfor %}
+                            </p>
+                            <p><b>Hermanos</b></p>
+                            <p>
+                                {% for hermano in object.hermanos.all %}
+                                    <i class="icon-chevron-right"></i><b> Nombre y Apellido:</b> {{hermano.get_full_name}}<br /> 
+                                    <hr>
+                                {% endfor %}
+                            </p>
+                        </div>
+                        <div class="tab-pane" id="tab_1_3">
+                            <p>
+                               <i class="icon-calendar"></i><b> Fecha de ingreso:</b> {{object.fecha_ingreso}}<br /> 
+                               <i class="icon-calendar"></i><b> Fecha de egreso:</b> {{object.fecha_egreso}}<br /> 
+                            </p>
+                        </div>
+                        <div class="tab-pane" id="tab_1_4">
+                            <p>
+                               <b> Padece enfermedad:</b> {{object.padece_enfermedad|yesno:"Si,No"}}<br /> 
+                               <b> Tipo de enfermedad:</b> {{object.tipo_enfermedad|default_if_none:""}}<br /> 
+                               <b> Controla esfínteres:</b> {{object.controla_esfinteres|yesno:"Si,No"}}<br /> 
+                               <b> Edad controla esfínteres:</b> {{object.edad_controla_esfinteres|default_if_none:""}}<br /> 
+                               <b> Usa mamadera:</b> {{object.usa_mamadera|yesno:"Si,No"}}<br /> 
+                               <b> Es alérgico:</b> {{object.es_alergico|yesno:"Si,No"}}<br /> 
+                               <b> Toma medicación:</b> {{object.toma_medicacion|yesno:"Si,No"}}<br /> 
+                               <b> En tratamiento médico:</b> {{object.en_tratamiento_medico|yesno:"Si,No"}}<br /> 
+                               <b> Detalle tratamiento:</b> {{object.detalle_tratamiento|default_if_none:""}}<br /> 
+                               <b> Tiene convulciones:</b> {{object.tiene_convulsiones|yesno:"Si,No"}}<br /> 
+                               <b> Tiene antitetánica:</b> {{object.tiene_antitetanica|yesno:"Si,No"}}<br /> 
+                               <b> Observaciones médicas:</b> {{object.observaciones_medicas|default_if_none:""}}<br /> 
+                               <b> Translado de emergencia:</b> {{object.traslado_emergencia|default_if_none:""}}<br /> 
+                               <b> Teléfono de emergencia:</b> {{object.telefono_emergencia|default_if_none:""}}<br /> 
+                            </p>
+                        </div>
+                        <div class="tab-pane" id="tab_1_5">
+                            <p>
+                               <b> Expresión verbal:</b> {{object.expresion_verbal|yesno:"Si,No"}}<br /> 
+                               <b> Vocabulario:</b> {{object.vocabulario|default_if_none:""}}<br /> 
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!--END TABS-->
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-4 col-md-4">
+            <h2 class="page-header">Situación Financiera</h2>
+                {% if st_debt == 0 %}
+                    <p>El alumno no debe nada en estos momentos.</p>
+                {% else %}
+                <p><h3>Deuda actual:</h3>
+                <ul>
+                    <li>Cuotas ${{ st_debt.0 }}</li>
+                    <li>Otros ${{ st_debt.1 }}</li>
+                    </ul>
+                </p>
+                {% endif%}
+
+                {% if unpaid_unicos %}
+                    <h3>Pagos adeudados:</h3>
+                    <ul>
+                    {% for uu in unpaid_unicos %}
+                        <li>
+                            <p>Tipo: {{ uu.tipo.get_tipo_display }}</p>
+                            <p>Deuda actual: {{ uu.deuda }}</p>
+                            <p>Importe original: {{ uu.importe }}</p>
+                            <p>Fecha: {{ uu.fecha }}</p>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {% if unpaid_cuotas %}
+                    <h3>Cuotas adeudadas:</h3>
+                    <ul>
+                    {% for uc in unpaid_cuotas %}
+                        <li>
+                            <p>Deuda actual: {{ uc.deuda }}</p>
+                            <p>Importe original: {{ uc.importe }}</p>
+                            <p>Fecha: {{ uc.fecha }}</p>
+                        </li>
+                    </ul>
+                    {% endfor %}
+                {% endif %}
+                <h3>Últimos pagos:</h3>
+                {% if st_last_payments %}
+                    {% for payment in st_last_payments %}
+                        <p><span>Fecha:</span> {{ payment.fecha }}</p>
+                        <p><span>Monto:</span> ${{ payment.abona }}</p>
+                        <p><span>Responsable:</span> {{ payment.responsable }}</p>
+                        {% if payment.comentarios %}
+                            <p><span>Comentarios:</span> {{ payment.comentarios }}</p>
+                        {% endif %}
+                        <hr />
+                    {% endfor %}
+                {% else %}
+                    <p>Todavía no se han realizado pagos.</p>
+                {% endif %}
+        </div>
+        <div class="col-sm-4 col-md-4">
+            <h2 class="page-header">Opciones {{request.user}}</h2>
+            <a id="realizar-pago" style="cursor:pointer;">Realizar pago</a> |
+            <a id="realizar-pago-unico" style="cursor:pointer;">Agregar pago unico</a>
+        </div>
+        <div class="col-sm-4 col-md-4">
+            <div id="container-form-pago" class="span4">
+            </div>
+        </div>
+   
+{% endblock %}
+{% block extra_scripts %}
+    <script>
+        $('#gestion-alumnos').addClass('current');
+        $('#alumnos').addClass('current');
+    </script>
+    <script>
+        $('#realizar-pago').click(function() {
+            $("#container-form-pago").load("{% url 'f_new_payment' object.id %}");
+        });
+        $('#realizar-pago-unico').click(function() {
+            $("#container-form-pago").load("{% url 'f_new_unique'  object.id %}");
+        });
+    </script>
+{% endblock %}

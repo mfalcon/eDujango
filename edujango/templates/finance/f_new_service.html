@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+ 
+{% block title %}Agregar servicio - {{ block.super }}{% endblock %}
+
+
+{% block main_content %}
+  
+    <div id="nav" class="span-24 last">
+        <a href="{% url 'index' %}">Home</a> > <a href={% url f_index %}>Finanzas</a> > Agregar servicio
+    </div>
+    <hr class="down">
+    
+    <h4>Nuevo servicio para: {{ st.get_full_name }}</h4>
+
+    <form method="POST" action="" class="span-20 prepend-2 append-2 last">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Aceptar" />
+    </form>
+        
+{% endblock %}  

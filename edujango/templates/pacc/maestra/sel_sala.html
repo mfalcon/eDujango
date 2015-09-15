@@ -1,0 +1,18 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Jardín Mi Arco Iris - {{ block.super }}{% endblock %}
+
+
+
+{% block main_content %}
+    <div class="row">
+        <div class="span10 offset2">
+            <h2>Por favor seleccione una sala:</h2>
+            <ul>
+                <li><a href="#">Rosa, turno tarde</a></li>
+                <li><a href={% url alumnos_sala %}>Verde, turno mañana</a></li>
+            </ul>
+        </div>
+
+    </div>     
+{% endblock %}

@@ -1,0 +1,50 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+        <title>{% block title %}JMAI{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.united.css' %}">
+        <link rel="stylesheet" href="{% static 'css/pacc_style.css' %}" type="text/css">
+        <script type="text/javascript" src="{% static 'js/jquery-1.7.1.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+        <script type="text/javascript"
+            src="http://malsup.github.com/min/jquery.form.min.js">
+        </script>
+        {% block extra_head %}{% endblock %}
+    </head>
+    <body>
+    
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container" style="width: auto;">
+                <a class="bar" href="#">Mi Arco Iris</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row" id="header">
+            <div class="span6">
+                <a href="{% url 'index' %}"><img id="logo" src="{% static 'images/logo/logo2.png' %}"></a>
+            </div>
+            <div class="span4 offset2">
+                <span id="bienvenida">Bienvenido <a href="{% url 'auth_password_change' %}">{{ user.username }}</a></span> / <a href="/accounts/logout">Logout.</a>
+            </div>
+        </div>
+        {% block nav %}{% endblock %}
+        <hr class="separator">
+        <br />
+        {% block main_content %}{% endblock %}
+        
+        {% block extra_body %}{% endblock %}
+        <br />
+        {% comment %}
+        <div class="row">
+            <div id="footer" class="span4 offset4">
+                <p>mF soluciones informáticas</p>
+            </div>
+        </div>
+        {% endcomment %}
+    </div>
+    </body>
+</html>    

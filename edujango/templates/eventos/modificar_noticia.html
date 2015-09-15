@@ -1,0 +1,40 @@
+{% extends "base_pacc.html" %}
+ 
+{% block title %}Modificar Noticia - {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'noticias' %}">Noticias</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="#">Modificar noticia</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block extra_head %}
+    <script type="text/javascript" src="/media/js/tiny_mce/tiny_mce.js"></script>
+    <script type="text/javascript">
+    tinyMCE.init({
+    mode: "textareas",
+    theme: "advanced",
+    
+    });
+    </script>
+{% endblock %}
+
+
+{% block main_content %}
+  
+<div class="row">
+    <div class="span8 offset2">
+        <form  method="POST" action="">{% csrf_token %}
+            {{ noticia_form.as_ul }}
+            <input id="boton_aceptar" type="submit" value="Enviar">
+        </form>
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Jardín Mi Arco Iris - {{ block.super }}{% endblock %}
+
+
+
+{% block main_content %}
+<h2>Salas:</h2>
+    <div class="row">
+        <form class="well form-search">
+            <input type="text" class="input-medium search-query">
+            <button type="submit" class="btn">Search</button>
+        </form>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Turno</th>
+                  <th>Cant alumnos</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td><b>Total alumnos:</b></td>
+                    <td></td>
+                    <td>97</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr>
+                  <td>Verde</td>
+                  <td>Mañana</td>
+                  <td>25</td>
+                  <td><a href="{% url 'info_sala' %}">Ver detalles</a></td>
+                </tr>
+                <tr>
+                  <td>Rojo</td>
+                  <td>Mañana</td>
+                  <td>35</td>
+                  <td><a href="#">Ver detalles</a></td>
+                </tr>
+                <tr>
+                  <td>Azul</td>
+                  <td>Mañana</td>
+                  <td>22</td>
+                  <td><a href="#">Ver detalles</a></td>
+                </tr>
+                <tr>
+                  <td>Celeste</td>
+                  <td>Tarde</td>
+                  <td>15</td>
+                  <td><a href="#">Ver detalles</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div> 
+{% endblock %}

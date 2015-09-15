@@ -1,0 +1,30 @@
+<html>
+
+<head>
+  <title>Entries index</title>
+</head>
+
+<body>
+	<h1>Latest entries index</h1>
+	{% for entry in latest %}
+		<h2>{{ entry.title }}</h2>
+		<p>Published on {{ entry.pub_date|date:"F j, Y" }}</p>
+		{% if entry_excerpt_html %}
+			{{ entry_excerpt_html|safe }}
+		{% else %}
+			{{ entry.body_html|truncatewords_html:"50"|safe }} 
+		{% endif %}
+		<p><a href="{{ entry.get_absolute_url }}">Read full entry</a></p>
+	{% endfor %}
+	<p> hola </p>
+	<ul>
+	  {% for month in date_field %}
+	    <li>
+	      <a href="{% url coltrane_entry_archive_month year,month|date:"b" %}">
+	      {{ month|date:"F" }}
+	    </a></li>
+	  {% endfor %}
+	</ul>
+</body>
+
+</html>

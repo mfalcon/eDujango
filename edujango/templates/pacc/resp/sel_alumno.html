@@ -1,0 +1,18 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Jardín Mi Arco Iris - {{ block.super }}{% endblock %}
+
+
+
+{% block main_content %}
+    <div class="row">
+        <div class="span10 offset2">
+            <h2>Por favor seleccione un alumno:</h2>
+            <ul>
+                <li><a href="{% url 'informes_alumno' %}">Fiore, Emiliano</a></li>
+                <li><a href="#">Fiore, Andrea</a></li>
+            </ul>
+        </div>
+
+    </div>     
+{% endblock %}

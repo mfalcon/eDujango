@@ -1,0 +1,2 @@
+- f_students.html: generate_payments debe ser un boton y no un href. Estaria bueno que cuando no se puede generar payments el boton aparezca como inhabilitado(jquery/AJAX).
+- f_students.html: add payment tambien como boton en lugar de href.

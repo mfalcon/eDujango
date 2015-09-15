@@ -1,0 +1,14 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Cuotas generadas - {{ block.super }}{% endblock %}
+
+{% block main_content %}
+
+    {% if not already_generated %}
+        <p>Las cuotas de este mes han sido generadas, gracias.</p>
+    {% else %}
+        <p>Las cuotas de este mes ya habían sido generadas, gracias</p>
+    {% endif %}
+
+{% endblock %}   
+

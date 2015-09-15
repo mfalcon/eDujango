@@ -1,0 +1,3 @@
+*.pyc
+edujango/dev_settings.py
+edujango/prod_settings.py

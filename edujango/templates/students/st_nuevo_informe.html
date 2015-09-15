@@ -1,0 +1,42 @@
+{% extends "base_pacc.html" %}
+ 
+{% block title %}Nuevo Informe - {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'st_index' %}">Alumnos</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="#">Nuevo informe</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block extra_head %}
+    <script type="text/javascript" src="/media/js/tiny_mce/tiny_mce.js"></script>
+    <script type="text/javascript">
+    tinyMCE.init({
+        theme: "advanced",
+    });
+    </script>
+{% endblock %}
+
+
+{% block main_content %}
+    <h2>Nuevo informe para {{ st.get_full_name }}</h2>
+    <br />
+    <br />
+    <div class="row">
+        <div class="span8 offset2">
+            <form id="create" method="POST" action="">{% csrf_token %}
+                {{ informe_form.as_p }}
+                <input id="boton_aceptar" type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

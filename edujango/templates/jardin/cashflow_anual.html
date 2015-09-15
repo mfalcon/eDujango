@@ -1,0 +1,70 @@
+{% extends 'new/base.html' %}
+{% block title %}Cashflow Anual{% endblock %}
+{% block breadcumb %}
+  <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'jardin' %}">Inicio</a>
+  </li>
+  <li>
+    <i class="icon-group"></i>
+    <a href="#">Gestión de Finanzas</a>
+  </li>
+  <li>    
+    <a href="#">Cashflow</a>
+  </li>
+  <li class="current">    
+    <a href="#">Cashflow Anual</a>
+  </li>
+{% endblock %}
+{% block content %}
+    <div class="col-md-12">
+            {% if movimientos %}
+            <table class="table table-stripped">
+            <thead>
+                <th>Tipo</th>
+                <th>Fecha</th>
+                <th>Ingresos</th>
+                <th>Gastos</th>
+            </thead>
+            <tfoot>
+                <td>Total: </td>
+                <td></td>
+                <td>{{ ingresos }}</td>
+                <td>{{ gastos }}</td>
+            </tfoot>
+            <tbody>
+            {% for m in movimientos %}
+                <tr>
+                    {% if m.1 == 'ingreso' %}
+                    <td><a href="{% url 'f_student_info' m.0.alumno.id %}">Cuota de {{ m.0.alumno }}</a></td>
+                    <td class="ingreso">{{ m.0.abona }}</td>
+                    <td></td>
+                    {% else %}{% if m.1 == 'ingreso_unico' %}
+                    <td><a href="{% url 'f_student_info' m.0.alumno.id %}">{{ m.0.tipo.get_tipo_display }} de {{ m.0.alumno }}</a></td>
+                    <td class="ingreso">{{ m.0.importe }}</td>
+                    <td></td>
+                    {% else %}{% if m.1 == 'sueldo' %}
+                    <td><a href="{% url 'f_empleado_info' m.0.empleado.id %}">Sueldo de {{ m.0.empleado }}</a></td>
+                    <td></td>
+                    <td class="gasto">{{ m.0.abona }}</td>
+                    {% else %}{% if m.1 == 'gasto' %}
+                    <td><a href={{ m.0.get_absolute_url }}>{{ m.0.get_tipo }}</a></td>
+                    <td></td>
+                    <td class="gasto">{{ m.0.importe }}</td>
+                    {% endif %}{% endif %}{% endif %}{% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        {% else %}
+            <p>No hay movimientos actualmente.</p>
+        {% endif %}
+        </div>
+  </div>
+{% endblock %}
+{% block extra_scripts %}
+    <script>
+      $('#gestion-finanzas').addClass('current');
+      $('#cashflow-anual').addClass('current');
+    </script>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base_entries.html" %}
+
+{% block title %} {{block.super }}| {{ year }} {% endblock %}
+
+{% block content %}
+<div id="columnacentral">
+ <ul>
+   {% for month in date_list %}
+     <li>
+       <a href="{% url coltrane_entry_archive_month year,month|date:"b" %}">
+         {{ month|date:"F" }}
+       </a></li>
+   {% endfor %}
+ </ul>
+ <div> </div>
+{% endblock %}
+

@@ -1,0 +1,110 @@
+{% extends 'new/base.html' %}
+{% load staticfiles %}
+{% block title %}Honorarios{% endblock %}
+{% block breadcumb %}
+  <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'jardin' %}">Inicio</a>
+  </li>
+  <li>
+    <i class="icon-group"></i>
+    <a href="#">Gestión de Empleados</a>
+  </li>
+  <li class="current">    
+    <a href="#">Honorarios</a>
+  </li>
+{% endblock %}
+{% block content %}
+	<div class="col-md-12">
+    <div class="btn-group">
+      {% if perms.efinance.add_honorarios %}
+        <button onclick="window.location.href='{% url 'honorario-jardin-nuevo' %}'" class="btn btn-lg">
+            Agregar Nuevo <i class="icon-plus"></i>
+        </button>
+      {% endif %}
+    </div>
+		<div class="btn-group pull-right">
+		    <form action="{% url 'honorarios-jardin' %}" method="GET">
+		        <input type="text" name="terms" class="form-control" placeholder="Buscar"/>
+            <i class="icon-search field-icon"></i>
+		    </form>
+		</div>
+		<br><br>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Empleado</th>
+                  <th>Básico</th>
+                  <th>Obra social</th>
+                  <th>Asignación por hijo</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+              	{% for honorario in object_list %}
+	                <tr id="f{{honorario.id}}">
+	                  <td>{{honorario.empleado}}</td>
+	                  <td>{{honorario.basico}}</td>
+                    <td>{{honorario.obrasocial}}</td>
+                    <td>{{honorario.asig_por_hijo}}</td>
+	                  <td>
+	                     <a data-original-title="Detalle" data-placement="top" data-toggle="tooltip" class="btn btn-info btn-sm tooltips" href="/jardin/gestion-empleados/honorarios/{{honorario.id}}/detalle/"><i class="glyphicon glyphicon-eye-open"></i></a>
+                      {% if perms.efinance.change_honorarios %}
+	                     <a data-original-title="Editar" data-placement="top" data-toggle="tooltip" class="btn btn-success btn-sm tooltips" href="/jardin/gestion-empleados/honorarios/{{honorario.id}}/editar/"><i class="glyphicon glyphicon-pencil"></i></a>
+                      {% endif %}
+                      {% if perms.efinance.delete_honorarios %}
+	                     <a data-original-title="Eliminar" data-placement="top" class="btn btn-danger btn-sm tooltips" data-toggle="modal" href="#m{{honorario.id}}"><i class="glyphicon glyphicon-trash"></i></a>
+                      {% endif %}
+	                </td>
+	                </tr>
+	                <!-- Modal -->
+                    <div class="modal fade" id="m{{honorario.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Eliminar Honorario</h4>
+                                </div>
+                                <div class="modal-body">
+
+                                <p>¿Esta seguro que desea eliminar el honorario <strong>{{honorario}}</strong>?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>
+                                    <button id="{{honorario.id}}" href="/jardin/gestion-empleados/honorarios/{{honorario.id}}/eliminar/" class="btn btn-danger eliminar" type="submit"> Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- modal -->
+	            {% endfor %}
+              </tbody>
+            </table>
+            {% if is_paginated %}
+                <div class="pagination">
+                    <span class="page-links">
+                        {% if page_obj.has_previous %}
+                            <a href="/gestion-empleados/honorarios?page={{ page_obj.previous_page_number }}">Anterior</a>
+                        {% endif %}
+                        <span class="page-current">
+                            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                        </span>
+                        {% if page_obj.has_next %}
+                            <a href="/gestion-empleados/honorarios?page={{ page_obj.next_page_number }}"> Siguiente</a>
+                        {% endif %}
+                    </span>
+                </div>
+            {% endif %}
+          </div>
+  </div>
+{% endblock %}
+{% block extra_scripts %}
+	<!-- Script para eliminar -->
+	<script src="{% static 'js/college/eliminar.js' %}"></script>
+  <script src="{% static 'js/college/orden-tabla.js' %}"></script>
+	<script>
+		$('#honorarios').addClass('current');
+    $('#gestion-empleados').addClass('current');
+	</script>
+{% endblock %}

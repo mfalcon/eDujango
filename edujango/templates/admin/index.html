@@ -1,0 +1,136 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="/media/admin/css/dashboard.css" />
+<link rel="stylesheet" href="/media/css/pacc_style.css" type="text/css">
+
+{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block extrahead %}
+<script type="text/javascript" src="/media/js/jquery-1.7.1.min.js"></script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $(".subitems").hide();
+
+    $(".menu li").click(function() {
+        $(this).children('.subitems').toggle(250);
+    })
+
+});
+
+</script>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    <ul class="menu">
+        <h3>Secci&oacute;n Acad&eacute;mica</h3>
+        <br />
+        <li>
+            <a href="javascript:void(0)"><img class="admin-icons" src="/media/images/icons/user_group.png">Informaci&oacute;n acad&eacute;mica</a>
+            <ul class="subitems">
+                {% if perms.students.change_alumno %}<li><a href="{% url 'admin:students_alumno_changelist' %}"><img src="">Alumnos</a></li>{% endif %}
+                {% if perms.students.change_informe %}<li><a href="{% url 'admin:students_informe_changelist' %}"><img src="">Informes</a></li>{% endif %}
+                {% if perms.students.change_sala %}<li><a href="{% url 'admin:students_sala_changelist' %}"><img src="">Salas</a></li>{% endif %}
+                {% comment %}<li><a href="{% url 'salas' %}"><img src="">Ver Salas</a></li>{% endcomment %}
+            </ul>
+        </li>
+        {% if perms.zinnia.change_entry %}<li><a href="zinnia"><img class="admin-icons" src="/media/images/icons/News.png">Noticias</a></li>{% endif %}
+
+        {% if perms.calendar.change_cal %}<li><a href="/admin/schedule/event/"><img class="admin-icons" src="/media/images/icons/calendar.png">Calendario</a></li>{% endif %}
+
+        <h3>Sección Gestión</h3>
+        <br />
+        <li><a href="javascript:void(0)"><img class="admin-icons" src="/media/images/icons/Clipboard.png">Gestión Alumnos</a>
+            <ul class="subitems">
+                {% if perms.students.change_alumno %}<li><a href="{% url 'admin:students_alumno_changelist' %}"><img src="">Alumnos</a></li>{% endif %}
+                {% if perms.finance.change_responsable %}<li><a href="{% url 'admin:finance_responsable_changelist' %}"><img src="">Responsables</a></li>{% endif %}
+                 {% if perms.students.change_alumno %}<li><a href="{% url 'admin:finance_autorizado_changelist' %}"><img src="">Autorizados</a></li>{% endif %}
+                {% if perms.finance.change_cuota %}<li><a href="{% url 'admin:finance_cuota_changelist' %}"><img src="">Cuotas</a></li>{% endif %}
+                {% if perms.finance.change_pago %}<li><a href="{% url 'admin:finance_pago_changelist' %}"><img src="">Pagos</a></li>{% endif %}
+                {% if perms.finance.change_serviciosuscripto %}<li><a href="{% url 'admin:finance_serviciosuscripto_changelist' %}"><img src="">Servicios suscriptos</a></li>{% endif %}
+                {% if perms.finance.change_tiposervicio %}<li><a href="{% url 'admin:finance_tiposervicio_changelist' %}"><img src="">Tipos de Servicio</a></li>{% endif %}
+                {% if perms.finance.change_unicopago %}<li><a href="{% url 'admin:finance_unicopago_changelist' %}"><img src="">Pagos Unicos</a></li>{% endif %}
+                {% if perms.finance.change_tipounicopago %}<li><a href="{% url 'admin:finance_tipounicopago_changelist' %}"><img src="">Tipos de pago unicos</a></li>{% endif %}
+            </ul>
+        </li>
+        <li><a href="javascript:void(0)"><img class="admin-icons" src="/media/images/icons/personal.png">Gestión Colegio</a>
+            <ul class="subitems">
+                {% if perms.college.change_profesor %}<li><a href="{% url 'admin:college_profesor_changelist' %}"><img src="">Profesores</a></li>{% endif %}
+                {% if perms.college.change_alumnocolegio %}<li><a href="{% url 'admin:college_alumnocolegio_changelist' %}"><img src="">Alumnos</a></li>{% endif %}
+                {% if perms.college.change_calificacion %}<li><a href="{% url 'admin:college_calificacion_changelist' %}"><img src="">Calificaciones</a></li>{% endif %}
+                {% if perms.college.change_division %}<li><a href="{% url 'admin:college_division_changelist' %}"><img src="">Divisiones</a></li>{% endif %}
+                {% if perms.college.change_materiadivision %}<li><a href="{% url 'admin:college_materiadivision_changelist' %}"><img src="">Materias Division</a></li>{% endif %}
+                {% if perms.college.change_materia %}<li><a href="{% url 'admin:college_materia_changelist' %}"><img src="">Materias</a></li>{% endif %}
+                {% if perms.college.change_asistencia %}<li><a href="{% url 'admin:college_asistencia_changelist' %}"><img src="">Asistencias</a></li>{% endif %}
+                {% if perms.college.change_estadoasistencia %}<li><a href="{% url 'admin:college_estadoasistencia_changelist' %}"><img src="">Estado Asistencias</a></li>{% endif %}
+            </ul>
+        </li>
+        <li><a href="javascript:void(0)"><img class="admin-icons" src="/media/images/icons/personal.png">Gestión Empleados</a>
+            <ul class="subitems">
+                {% if perms.efinance.change_empleado %}<li><a href="{% url 'admin:efinance_empleado_changelist' %}"><img src="">Empleados</a></li>{% endif %}
+                {% if perms.students.change_maestra %}<li><a href="{% url 'admin:students_maestra_changelist' %}"><img src="">Maestras</a></li>{% endif %}
+                {% comment %}{% if perms.efinance.change_honorarios %}<li><a href="{% url 'admin:efinance_honorarios_changelist' %}"><img src="">Honorarios</a></li>{% endif %}{% endcomment %}
+                {% if perms.efinance.change_honorarios %}<li><a href="{% url 'admin:efinance_honorarios_changelist' %}"><img src="">Honorarios</a></li>{% endif %}
+                {% if perms.efinance.change_sueldo %}<li><a href="{% url 'admin:efinance_sueldo_changelist' %}"><img src="">Sueldos</a></li>{% endif %}
+                {% if perms.efinance.change_pagosueldo %}<li><a href="{% url 'admin:efinance_pagosueldo_changelist' %}"><img src="">Pagos de sueldo</a></li>{% endif %}
+                {% comment %}{% if perms.efinance.change_empleado %}<li><a href="{% url 'f_cashflow' %}"><img src="">Cashflow</a></li>{% endif %}{% endcomment %}
+            </ul>
+        </li>
+        <li><a href="javascript:void(0)"><img class="admin-icons" src="/media/images/icons/Coinstack.png">Gestión Finanzas</a>
+            <ul class="subitems">
+                {% comment %}
+                {% if perms.efinance.change_empleado %}<li><a href="{% url 'admin_f_students' %}"><img src="">Alumnos</a></li>{% endif %}
+                {% if perms.efinance.change_empleado %}<li><a href="{% url 'admin_f_cashflow' %}"><img src="">Balance</a></li>{% endif %}
+                {% if perms.efinance.change_empleado %}<li><a href="{% url 'admin_f_empleados' %}"><img src="">Empleados</a></li>{% endif %}
+                {% endcomment %}
+                {% if perms.efinance.change_gasto %}<li><a href="{% url 'admin:efinance_gasto_changelist' %}"><img src="">Gastos</a></li>{% endif %}
+            </ul>
+        </li>
+        <h3>Sección Configuración</h3>
+        <br />
+        {% if perms.auth.change_user %}<li><a href="{% url 'admin:finance_customuser_changelist' %}"><img class="admin-icons" src="/media/images/icons/config.png">Configuración de usuarios</a></li>{% endif %}
+    </ul>
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<div id="content-related">
+    <div class="module" id="recent-actions-module">
+        <h2>{% trans 'Recent Actions' %}</h2>
+        <h3>{% trans 'My Actions' %}</h3>
+            {% load log %}
+            {% get_admin_log 10 as admin_log for_user user %}
+            {% if not admin_log %}
+            <p>{% trans 'None available' %}</p>
+            {% else %}
+            <ul class="actionlist">
+            {% for entry in admin_log %}
+            <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+                {% if entry.is_deletion or not entry.get_admin_url %}
+                    {{ entry.object_repr }}
+                {% else %}
+                    <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                {% endif %}
+                <br/>
+                {% if entry.content_type %}
+                    <span class="mini quiet">{% filter capfirst %}{% trans entry.content_type.name %}{% endfilter %}</span>
+                {% else %}
+                    <span class="mini quiet">{% trans 'Unknown content' %}</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+    </div>
+</div>
+
+{% endblock %}

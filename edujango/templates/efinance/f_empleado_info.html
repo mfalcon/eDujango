@@ -1,0 +1,60 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Informacion empleado - {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'f_index' %}">Finanzas</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'f_empleados' %}">Empleados</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="#">Informacion empleado</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main_content %}
+    <h2>Informacion empleado</h2>
+    <br />
+    <br />
+    <div class="row">
+        <div class="span3 offset9">
+            <a href="{% url 'f_pagar_sueldo' empleado.id %}">Realizar pago </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="span8 offset2">
+            <p>Empleado:<b> {{ empleado.get_full_name }}</b></p>
+            {% if empleado.get_deuda %}
+                <p><span class="inf">Se le adeudan:</span> $ {{ empleado.get_deuda }}</p>
+            {% else %}
+                <p>No se le debe dinero a este empleado.</p>
+            {% endif %}
+
+            {% if empleado.get_ultimos_pagos %}
+                <p><span class="inf">Ultimos pagos:</span></p>
+                <ul>
+                {% for pago in empleado.get_ultimos_pagos %}
+                    <li><span class="inf">Fecha:</span> {{ pago.fecha }}</li>
+                    <li><span class="inf">Monto:</span> $ {{ pago.abona }}</li>
+                    {% comment %}
+                    <a href="{% url 'e_mod_pago_sueldo' pago.id %}">Modificar</a> |
+                    <a href="#">Eliminar</a>
+                    {% endcomment %}
+                    <hr />
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>Aún no se le han hecho pagos a este empleado.</p>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

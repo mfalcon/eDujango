@@ -1,0 +1,44 @@
+{% extends 'college/base_college.html' %}
+{% block title %}Detalle {{ object }}{% endblock %}
+{% block content %}
+	<ol class="breadcrumb">
+	  <li><a href="{% url 'profesores' %}">Profesores</a></li>
+	  <li class="active">Detalle</li>
+	</ol>
+	<br>
+	<div class="row">
+        <div class="col-sm-3 col-md-3">
+        	<img class="media-object img-rounded img-responsive"  src="http://placehold.it/350x450" alt="placehold.it/350x250" >
+        </div>
+        <div class="col-sm-4 col-md-4">
+            <blockquote>
+                <p>{{object}}</p> 
+                <small>
+                	<cite title="Source Title">{{object.domicilio}} - {{object.localidad}}, {{object.nacionalidad}}  
+                		<i class="fa fa-map-marker"></i>
+                	</cite>
+                </small>
+            </blockquote>
+            <p> 
+            	<i class="fa fa-phone"></i> {{object.telefono}}<br /> 
+            	<i class="fa fa-envelope"></i> {{object.email}}<br /> 
+                <i class="fa fa-chevron-right"></i> {{object.tipo_doc}}<br /> 
+                <i class="fa fa-chevron-right"></i> {{object.num_doc}}<br /> 
+                <i class="fa fa-user"></i> {{object.sexo}}<br /> 
+                <i class="fa fa-calendar"></i> {{object.fecha_nac}}<br /> 
+            </p>
+        </div>
+        <div class="col-sm-4 col-md-4">
+            <h2 class="page-header">Materias</h2>
+            {% for materia in object.materia.all %}
+            	{{materia}}<br />
+            {% endfor %}
+        </div>
+    </div>
+   
+{% endblock %}
+{% block extra_script %}
+    <script>
+        $('#profesores').addClass('active');
+    </script>
+{% endblock %}

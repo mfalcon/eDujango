@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Alumnos - {{ block.super }}{% endblock %}
+
+{% block main_content %}
+    <div id="nav" class="span-24 last">
+    <a href="{% url 'index' %}">Home</a> > Alumnos
+    </div>
+    <hr class="down">
+    
+    <div class="span-24 last">
+        <ul>
+            <li><a href="{% url 'st_students_list' %}">Listado alumnos</a></li>
+            <!--<li><a href={% url 'st_new_student' %}>Agregar alumno</a></li>-->
+            <!--<li><a href={% url 'st_salas' %}>Salas</a></li>-->
+        </ul>
+    </div>
+
+{% endblock %}   

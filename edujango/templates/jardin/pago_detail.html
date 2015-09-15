@@ -1,0 +1,26 @@
+{% extends 'new/base.html' %}
+{% block title %}Detalle {{ object }}{% endblock %}
+{% block breadcumb %}
+  <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'jardin' %}">Inicio</a>
+  </li>
+  <li>
+    <i class="icon-group"></i>
+    <a href="{% url 'pagos-al-jardin' %}">Pagos</a>
+  </li>
+  <li class="current">    
+    <a href="#">Detalle</a>
+  </li>
+{% endblock %}
+{% block content %}
+    <div class="col-sm-4 col-md-4">
+       Ver que se quiere poner acá. Si es que va algo.
+    </div>
+{% endblock %}
+{% block extra_scripts %}
+    <script>
+      $('#gestion-alumnos').addClass('current');
+      $('#pagos').addClass('current');
+    </script>
+{% endblock %}

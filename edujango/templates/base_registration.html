@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}eDuJango{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" media="all" href="{% static 'css/stylereg.css' %}" />
+        <script type="text/javascript" src="{% static 'js/jquery-1.4.2.js' %}"></script>
+    </title>            
+        {% block extra_head %}{% endblock %}
+    </head>
+    <body>
+        <div id="login">
+        {% block main_content %}{% endblock %}
+        </div> 
+    </body>
+</html>    

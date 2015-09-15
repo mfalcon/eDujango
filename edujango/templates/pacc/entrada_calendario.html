@@ -1,0 +1,56 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Modificar calendario - {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'calendario' %}">Calendario</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="#">Modificar evento</a>
+    </li>
+</ul>
+{% endblock %}
+
+
+{% block extra_head %}
+<script src="/media/js/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $( "#datepicker" ).datepicker();
+    });
+</script>       
+{% endblock %}
+
+{% block main_content %}
+    <h2>Modificar evento</h2>
+    <br />
+    <div class="row">
+        <div class="span8 offset1">
+            <form class="well">
+                <p>Fecha: </p><input type="text" class="input-small" id="datepicker">
+                <p>Hora: </p>
+                <input type="text" class="input-small" placeholder="Hora">
+                <input type="text" class="input-small" placeholder="Minutos">
+                <p>Tipo de evento:</p>
+                <select id="select01">
+                    <option>Reunion</option>
+                    <option>Acto</option>
+                    <option>Fiesta</option>
+                    <option>Campamento</option>
+                </select>
+                <p>Detalle:</p>
+                <input type="text" class="input-xlarge" id="input01">
+                <br />
+                <br />
+                <br />
+                <button type="submit" class="btn">Enviar</button>
+            </form>
+        </div>
+    </div>
+    
+{% endblock %}

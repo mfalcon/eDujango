@@ -1,0 +1,114 @@
+{% extends "base_pacc.html" %}
+{% load staticfiles %}
+{% block title %}Jardín Mi Arco Iris - {{ block.super }}{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="https://datatables.net/media/blog/bootstrap_2/DT_bootstrap.css" type="text/css">
+    <script type="text/javascript" src="https://datatables.net/release-datatables/media/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="https://datatables.net/media/blog/bootstrap_2/DT_bootstrap.js"></script>
+{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="{% url 'st_students_list' %}">Alumnos</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main_content %}
+<h2>Alumnos</h2>
+    {% if tipo == 4 %}
+    <div class="row">
+        <div class="span3 offset9">       
+            <a href="{% url 'st_salas' %}">Listado de salas</a></li>
+        </div>
+    </div>
+    {% endif %}
+<br />
+<br />
+    <div class="row">
+        <div class="span8 offset2">
+                {% if tipo in "01" %}
+                    <ul>
+                    <li><a href="{% url 'st_new_student' %}">Agregar alumno</a></li>
+                    <li><a href="{% url 'f_monthly_payment' %}">Generar cuotas mensuales</a></li>
+                    </ul>
+                {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="span8 offset2">
+            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Sala</th>
+                </tr>
+            </thead>
+                <tbody>
+                    {% for st in students %}
+                        <tr class="odd gradeX">
+                            <td><a href="{% url 'st_student_personal_info' st.id %}">{{ st.get_full_name }}</a></td>
+                            <td>
+                                {% for sala in st.sala.all %}
+                                    <a href="{% url 'st_info_sala' sala.id %}">{{ sala.get_sala_display }}</a>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+            {% comment %}
+            <div class="pagination">
+                <ul>
+                    <li><a href="#">Anterior</a></li>
+                    <li class="active">
+                        <a href="#">1</a>
+                    </li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">Siguiente</a></li>
+                </ul>
+            </div>
+            {% endcomment %}
+        </div>
+    </div>    
+    <!--script for this page only-->
+
+      <script type="text/javascript" charset="utf-8">
+        $.extend( true, $.fn.dataTable.defaults, {
+            oLanguage:     {
+                sProcessing:     "Procesando...",
+                sSearch:         "Buscar:",
+                sLengthMenu:     "Mostrar _MENU_ registros",
+                sZeroRecords:    "No se encontraron resultados",
+                sEmptyTable:     "Ningún dato disponible en esta tabla",
+                sInfo:           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                sInfoEmpty:      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                sInfoFiltered:   "(filtrado de un total de _MAX_ registros)",
+                sInfoPostFix:    "",
+                sUrl:            "",
+                sInfoThousands:  ",",
+                sLoadingRecords: "Cargando...",
+                oPaginate: {
+                    sFirst:    "Primero",
+                    sLast:     "Último",
+                    sNext:     "Siguiente",
+                    sPrevious: "Anterior"
+                },
+                oAria: {
+                    sSortAscending:  ": Activar para ordenar la columna de manera ascendente",
+                    sSortDescending: ": Activar para ordenar la columna de manera descendente"
+                }
+            },
+        });
+
+        $(document).ready( function () {
+            var table = $('#example').DataTable();
+        } );
+      </script>
+{% endblock %}

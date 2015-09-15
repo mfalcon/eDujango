@@ -1,0 +1,38 @@
+Hay tres apps:
+
+- students: la parte académica de la app(alumnos, salas, informes, ...).
+- finance: la parte de finanzas de los estudiantes(cuotas, pagos unicos, ...).
+- efinance: la parte de finanzas de los empleados y gastos generales.
+- eventos: calendario, no desarrollada aún.
+
+Proceso de creación de usuarios:
+
+Hay diferentes tipos de usuario con acceso a distintas partes del sistema.
+
+Owner: acceso a todo el sistema.
+Directora: acceso a toda la parte académica del sistema.
+Secretaria/administrativa: acceso a la parte de finanzas.
+Responsable del alumno: acceso a la informacion que concierne al alumno.
+
+
+Para crear un usuario se deben seguir los siguientes pasos(en el admin de django):
+
+1) Crear el empleado con el puesto determinado.
+2) Agregar usuario en "Configuracion de usuarios", indicar el puesto en el Tipo de Usuario, elegir modelo empleado(*) y poner el id del empleado creado.
+
+
+Proceso para generar cuotas del mes:
+
+Las cuotas del mes se generan al hacer click en el botón "generar cuotas mensuales", a la cual se accede ingresando a la sección alumnos de la app principal (sin el /admin).
+Se utilizan las funciones dentro de utils.py(https://bitbucket.org/mf/edujango/src/fd0827094df54fb82432ee6e2bc43a285931bcc2/finance/utils.py?at=master) para generarlas. Las cuotas
+se generan para todos los alumnos inscriptos, si un alumno se inscribe al otro dia de haber generado las cuotas habria que crearselas manualmente a traves del admin.
+
+En otro momento habria que revisar este proceso y tratar de mejorarlo.
+
+
+Proceso para crear pagos unicos:
+
+todo
+
+
+(*) No recuerdo para que sirve el modelo en este caso.

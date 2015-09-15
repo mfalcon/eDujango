@@ -1,0 +1,27 @@
+{% extends "base_pacc.html" %}
+{% load i18n %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li class="active">
+        <a href="#">Login</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main_content %}
+    <h2>Por favor, ingrese su nombre de usuario y contraseña</h2>
+    <br>
+    <br>
+    <div class="row">
+        <div class="span8 offset4">
+            <form method="post" action=".">{% csrf_token %}
+              <b>{{ form.as_p }}</b>
+              <input type="submit" value="{% trans 'Log in' %}" />
+              <input type="hidden" name="next" value="{{ next }}" />
+            </form>
+
+            {% comment %}<p>¿{% trans "Olvidó su password" %}? <a href="{% url auth_password_reset %}">{% trans "Resetearlo" %}</a>!</p>{% endcomment %}
+        </div>
+    </div>
+{% endblock %}

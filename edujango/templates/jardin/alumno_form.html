@@ -1,0 +1,394 @@
+{% extends 'new/base.html' %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+{% block title %}Añadir Alumno{% endblock %}
+{% block extra_style %}
+{% endblock %}
+{% block breadcumb %}
+  <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'jardin' %}">Inicio</a>
+  </li>
+  <li>
+    <i class="icon-group"></i>
+    <a href="#">Gestión de Alumnos</a>
+  </li>
+  <li>    
+    <a href="{% url 'alumnos-jardin' %}">Alumnos</a>
+  </li>
+  <li class="current">    
+    <a href="#">Añadir Alumno</a>
+  </li>
+{% endblock %}
+{% block content %}
+    <div class="col-md-12">
+        <div class="panel-body">
+           <form class="form-horizontal tasi-form" method="POST">{% csrf_token %}
+            <div class="col-lg-12">
+              <div class="widget-content">
+                <div class="tabbable box-tabs">
+                  <ul class="nav nav-tabs">
+                    <li><a href="#box_tab7" data-toggle="tab">Alumno Sala</a></li>
+                    <li><a href="#box_tab6" data-toggle="tab">Servicios Suscriptos</a></li>
+                    <li><a href="#box_tab5" data-toggle="tab">Otros</a></li>
+                    <li><a href="#box_tab4" data-toggle="tab">Médica</a></li>
+                    <li><a href="#box_tab3" data-toggle="tab">Académica</a></li>
+                    <li><a href="#box_tab2" data-toggle="tab">Familiar</a></li>
+                    <li class="active"><a href="#box_tab1" data-toggle="tab">Personal</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="box_tab1">
+
+                      <div class="{% if form.nombre1.errors %}has-error{% endif %}">
+                        <label>Nombre</label>
+                        <input id="{{form.nombre1.id_for_label}}" name="{{ form.nombre1.html_name }}" type="text"  class="form-control" value="{{ form.nombre1.value|default_if_none:"" }}">
+                        <p class="help-block">{{ form.nombre1.errors }}</p>
+                      </div>
+
+                      <div class="{% if form.nombre2.errors %}has-error{% endif %}">
+                        <label>Segundo Nombre</label>
+                        <input id="{{form.nombre2.id_for_label}}" name="{{ form.nombre2.html_name }}" type="text"  class="form-control" value="{{ form.nombre2.value|default_if_none:"" }}">
+                        <p class="help-block">{{ form.nombre2.errors }}</p>
+                      </div>
+
+                      <div class="{% if form.apellido.errors %}has-error{% endif %}">
+                        <label>Apellido</label>
+                        <input id="{{form.apellido.id_for_label}}" name="{{ form.apellido.html_name }}" type="text"  class="form-control" value="{{ form.apellido.value|default_if_none:"" }}">
+                        <p class="help-block">{{ form.apellido.errors }}</p>
+                      </div>
+
+                      <div class="{% if form.tipo_doc.errors %}has-error{% endif %}">
+                        <label>Tipo de Documento</label>
+                        <select id="{{ form.tipo_doc.id_for_label }}" name="{{ form.tipo_doc.html_name }}" class="form-control">
+                            {% for tipo_doc in form.tipo_doc %}
+                              <option value={{tipo_doc}}</option>
+                            {% endfor %}
+                        </select><br>
+                      </div>
+
+                      <div class="{% if form.num_doc.errors %}has-error{% endif %}">
+                        <label>Número de documento</label>
+                        <input id="{{form.num_doc.id_for_label}}" name="{{ form.num_doc.html_name }}" type="text"  class="form-control" value="{{ form.num_doc.value|default_if_none:"" }}">
+                        <p class="help-block">{{ form.num_doc.errors }}</p>
+                        <p class="help-block">{{form.num_doc.help_text}}</p>
+                      </div>
+
+                      <div class="{% if form.sexo.errors %}has-error{% endif %}">
+                        <label>Sexo</label>
+                        <select id="{{ form.sexo.id_for_label }}" name="{{ form.sexo.html_name }}" class="form-control">
+                          {% for sexo in form.sexo %}
+                            <option value={{sexo}}</option>
+                          {% endfor %}
+                        </select><br>
+                      </div>
+
+                      <div class="{% if form.fecha_nac.errors %}has-error{% endif %}">
+                        <label>Fecha de nacimiento</label>
+                        <input id="{{form.fecha_nac.id_for_label}}" name="{{ form.fecha_nac.html_name }}" type="text"  class="form-control datepicker" value="{{ form.fecha_nac.value|default_if_none:"" }}">
+                        <p class="help-block">{{ form.fecha_nac.errors }}</p>
+                      </div>
+                      
+                      <div class="{% if form.nacionalidad.errors %}has-error{% endif %}">
+                        <label>Nacionalidad</label>
+                        <select id="{{ form.nacionalidad.id_for_label }}" name="{{ form.nacionalidad.html_name }}" class="form-control">
+                            {% for nacionalidad in form.nacionalidad %}
+                              <option value={{nacionalidad}}</option>
+                            {% endfor %}
+                        </select><br>
+                      </div>
+
+                      <div class="{% if form.localidad.errors %}has-error{% endif %}">
+                        <label>Localidad</label>
+                        <input id="{{form.localidad.id_for_label}}" name="{{ form.localidad.html_name }}" type="text"  class="form-control" value="{{ form.localidad.value|default_if_none:"" }}">
+                          <p class="help-block">{{ form.localidad.errors }}</p>
+                      </div>
+                      
+                      <div class="{% if form.domicilio.errors %}has-error{% endif %}">
+                        <label>Domicilio</label>
+                        <input id="{{form.domicilio.id_for_label}}" name="{{ form.domicilio.html_name }}" type="text"  class="form-control" value="{{ form.domicilio.value|default_if_none:"" }}">
+                          <p class="help-block">{{ form.domicilio.errors }}</p>
+                      </div>
+
+                      <div class="{% if form.telefono.errors %}has-error{% endif %}">
+                        <label>Teléfono</label>
+                        <input id="{{form.telefono.id_for_label}}" name="{{ form.telefono.html_name }}" type="text"  class="form-control" value="{{ form.telefono.value|default_if_none:"" }}">
+                        <p class="help-block">{{form.telefono.help_text}}</p>
+                          <p class="help-block">{{ form.telefono.errors }}</p>
+                      </div>
+                      
+                      <div class="{% if form.email.errors %}has-error{% endif %}">
+                        <label>Email</label>
+                        <input id="{{form.email.id_for_label}}" name="{{ form.email.html_name }}" type="email"  class="form-control" value="{{ form.email.value|default_if_none:"" }}">
+                          <p class="help-block">{{ form.email.errors }}</p>
+                      </div>
+
+                    </div>
+
+                    <div class="tab-pane" id="box_tab2">
+
+                      <div class="{% if form.responsables.errors %}has-error{% endif %}">
+                        <label>Responsables</label>
+                        <select multiple="multiple" id="{{ form.responsables.id_for_label }}" name="{{ form.responsables.html_name }}" class="selectmultiple form-control">
+                            {% for responsables in form.responsables %}
+                              <option value={{responsables}}</option>
+                            {% endfor %}
+                        </select>
+                      </div>
+                      <p class="help-block">{{form.responsables.help_text}}</p>
+                      <a href="/admin/finance/responsable/add/" class="add-another" id="add_id_responsables"
+                        onclick="return showAddAnotherPopup(this);">
+                        <i class="icon-plus"></i>
+                      </a><br>
+
+                      <div class="{% if form.autorizados.errors %}has-error{% endif %}">
+                        <label>Autorizados</label>
+                        <select multiple="multiple" id="{{ form.autorizados.id_for_label }}" name="{{ form.autorizados.html_name }}" class="selectmultiple form-control">
+                            {% for autorizados in form.autorizados %}
+                              <option value={{autorizados}}</option>
+                            {% endfor %}
+                        </select>
+                      </div>
+                      <p class="help-block">{{form.autorizados.help_text}}</p>
+                      <a href="/admin/finance/autorizado/add/" class="add-another" id="add_id_autorizados"
+                        onclick="return showAddAnotherPopup(this);">
+                        <i class="icon-plus"></i>
+                      </a><br>
+
+                      <div class="{% if form.hermanos.errors %}has-error{% endif %}">
+                        <label>Hermanos</label>
+                        <select multiple="multiple" id="{{ form.hermanos.id_for_label }}" name="{{ form.hermanos.html_name }}" class="selectmultiple form-control">
+                            {% for hermanos in form.hermanos %}
+                              <option value={{hermanos}}</option>
+                            {% endfor %}
+                        </select>
+                      </div>
+                      <p class="help-block">{{form.hermanos.help_text}}</p>
+                    </div>
+
+                    <div class="tab-pane" id="box_tab3">
+
+                      
+
+                      <div class="{% if form.fecha_ingreso.errors %}has-error{% endif %}">
+                        <label>Fecha de ingreso</label>
+                        <input id="{{form.fecha_ingreso.id_for_label}}" name="{{ form.fecha_ingreso.html_name }}" type="text"  class="form-control datepicker" value="{{ form.fecha_ingreso.value|default_if_none:"" }}">
+                        <p class="help-block">{{ form.fecha_ingreso.errors }}</p>
+                      </div>
+
+                      <div class="{% if form.fecha_egreso.errors %}has-error{% endif %}">
+                        <label>Fecha de egreso</label>
+                        <input id="{{form.fecha_egreso.id_for_label}}" name="{{ form.fecha_egreso.html_name }}" type="text"  class="form-control datepicker" value="{{ form.fecha_egreso.value|default_if_none:"" }}">
+                        <p class="help-block">{{ form.fecha_egreso.errors }}</p>
+                      </div>
+                    </div>
+
+                    <div class="tab-pane" id="box_tab4">
+
+                        
+                        <div class="checkbox">
+                          <label>
+                            <input id="{{form.padece_enfermedad.id_for_label}}" name="{{ form.padece_enfermedad.html_name }}" type="checkbox"  value="{{ form.padece_enfermedad.value|default_if_none:"" }}"> Padece enfermedad
+                            <p class="help-block">{{ form.padece_enfermedad.errors }}</p>
+                          </label>
+                        </div>
+
+                        <div class="{% if form.tipo_enfermedad.errors %}has-error{% endif %}">
+                          <label>Tipo de enfermedad</label>
+                          <input id="{{form.tipo_enfermedad.id_for_label}}" name="{{ form.tipo_enfermedad.html_name }}" type="text"  class="form-control" value="{{ form.tipo_enfermedad.value|default_if_none:"" }}">
+                            <p class="help-block">{{ form.tipo_enfermedad.errors }}</p>
+                        </div>
+
+
+                        <div class="checkbox">
+                          <label>
+                            <input id="{{form.controla_esfinteres.id_for_label}}" name="{{ form.controla_esfinteres.html_name }}" type="checkbox"  value="{{ form.controla_esfinteres.value|default_if_none:"" }}"> Controla esfínteres
+                            <p class="help-block">{{ form.controla_esfinteres.errors }}</p>
+                          </label>
+                        </div>
+
+                        <div class="{% if form.edad_controla_esfinteres.errors %}has-error{% endif %}">
+                          <label>Edad controla esfínteres</label>
+                          <input id="{{form.edad_controla_esfinteres.id_for_label}}" name="{{ form.edad_controla_esfinteres.html_name }}" type="number"  class="form-control" value="{{ form.edad_controla_esfinteres.value|default_if_none:"" }}">
+                            <p class="help-block">{{ form.edad_controla_esfinteres.errors }}</p>
+                        </div>
+
+
+                        <div class="checkbox">
+                          <label>
+                            <input id="{{form.usa_mamadera.id_for_label}}" name="{{ form.usa_mamadera.html_name }}" type="checkbox"  value="{{ form.usa_mamadera.value|default_if_none:"" }}"> Usa mamadera
+                            <p class="help-block">{{ form.usa_mamadera.errors }}</p>
+                          </label>
+                        </div>
+
+                        <div class="checkbox">
+                          <label>
+                            <input id="{{form.es_alergico.id_for_label}}" name="{{ form.es_alergico.html_name }}" type="checkbox"  value="{{ form.es_alergico.value|default_if_none:"" }}"> Es alérgico
+                            <p class="help-block">{{ form.es_alergico.errors }}</p>
+                          </label>
+                        </div>
+
+                        <div class="checkbox">
+                          <label>
+                            <input id="{{form.toma_medicacion.id_for_label}}" name="{{ form.toma_medicacion.html_name }}" type="checkbox"  value="{{ form.toma_medicacion.value|default_if_none:"" }}"> Toma medicación
+                            <p class="help-block">{{ form.toma_medicacion.errors }}</p>
+                          </label>
+                        </div>
+
+                        <div class="checkbox">
+                          <label>
+                            <input id="{{form.en_tratamiento_medico.id_for_label}}" name="{{ form.en_tratamiento_medico.html_name }}" type="checkbox"  value="{{ form.en_tratamiento_medico.value|default_if_none:"" }}"> En tratamiento médico
+                            <p class="help-block">{{ form.en_tratamiento_medico.errors }}</p>
+                          </label>
+                        </div>
+
+                        <div class="{% if form.detalle_tratamiento.errors %}has-error{% endif %}">
+                          <label>Detalle tratamiento</label>
+                          <input id="{{form.detalle_tratamiento.id_for_label}}" name="{{ form.detalle_tratamiento.html_name }}" type="text"  class="form-control" value="{{ form.detalle_tratamiento.value|default_if_none:"" }}">
+                            <p class="help-block">{{ form.detalle_tratamiento.errors }}</p>
+                        </div>
+
+                        <div class="checkbox">
+                          <label>
+                            <input id="{{form.tiene_convulsiones.id_for_label}}" name="{{ form.tiene_convulsiones.html_name }}" type="checkbox"  value="{{ form.tiene_convulsiones.value|default_if_none:"" }}"> Tiene convulciones
+                            <p class="help-block">{{form.tiene_convulsiones.help_text}}</p>
+                            <p class="help-block">{{ form.tiene_convulsiones.errors }}</p>
+                          </label>
+                        </div>
+
+                        <div class="checkbox">
+                          <label>
+                            <input id="{{form.tiene_antitetanica.id_for_label}}" name="{{ form.tiene_antitetanica.html_name }}" type="checkbox"  value="{{ form.tiene_antitetanica.value|default_if_none:"" }}"> Tiene antitetánica
+                            <p class="help-block">{{ form.tiene_antitetanica.errors }}</p>
+                          </label>
+                        </div>
+
+                        <div class="{% if form.observaciones_medicas.errors %}has-error{% endif %}">
+                          <label>Observaciones Médicas</label>
+                          <textarea id="{{form.observaciones_medicas.id_for_label}}" name="{{ form.observaciones_medicas.html_name }}" class="form-control" rows="3">{{ form.observaciones_medicas.value|default_if_none:"" }}</textarea>
+                          <p class="help-block">{{form.observaciones_medicas.help_text}}</p>
+                          <p class="help-block">{{ form.observaciones_medicas.errors }}</p>
+                        </div>
+
+                        <div class="{% if form.traslado_emergencia.errors %}has-error{% endif %}">
+                          <label>Translado de emergencia</label>
+                          <input id="{{form.traslado_emergencia.id_for_label}}" name="{{ form.traslado_emergencia.html_name }}" type="text"  class="form-control" value="{{ form.traslado_emergencia.value|default_if_none:"" }}">
+                            <p class="help-block">{{ form.traslado_emergencia.errors }}</p>
+                        </div>
+
+                        <div class="{% if form.telefono_emergencia.errors %}has-error{% endif %}">
+                          <label>Teléfono de emergencia</label>
+                          <input id="{{form.telefono_emergencia.id_for_label}}" name="{{ form.telefono_emergencia.html_name }}" type="number"  class="form-control" value="{{ form.telefono_emergencia.value|default_if_none:"" }}">
+                          <p class="help-block">{{form.telefono_emergencia.help_text}}</p>
+                          <p class="help-block">{{ form.telefono_emergencia.errors }}</p>
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane" id="box_tab5">
+                        <div class="checkbox">
+                          <label>
+                            <input id="{{form.expresion_verbal.id_for_label}}" name="{{ form.expresion_verbal.html_name }}" type="checkbox"  value="{{ form.expresion_verbal.value|default_if_none:"" }}"> Expresión verbal
+                            <p class="help-block">{{ form.expresion_verbal.errors }}</p>
+                          </label>
+                        </div>
+
+                        <div class="{% if form.vocabulario.errors %}has-error{% endif %}">
+                          <label>Vocabulario</label>
+                          <input id="{{form.vocabulario.id_for_label}}" name="{{ form.vocabulario.html_name }}" type="number"  class="form-control" value="{{ form.vocabulario.value|default_if_none:"" }}">
+                          <p class="help-block">{{form.vocabulario.help_text}}</p>
+                          <p class="help-block">{{ form.vocabulario.errors }}</p>
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane" id="box_tab6">
+                      {{ servicio_form.management_form|crispy }}
+                    {{ servicio_form.non_form_errors }}
+                    {% for form in servicio_form %}
+                      {{ form.id }}
+                      <div class="inline {{ servicio_form.prefix }}">
+                        {% if form.instance.pk %}{{ form.DELETE }}{% endif %}
+                          <label>Tipo</label>
+                          <select id="{{ form.tipo.id_for_label }}" name="{{ form.tipo.html_name }}" class="form-control">
+                              {% for tipo in form.tipo %}
+                                <option value={{tipo}}</option>
+                              {% endfor %}
+                          </select>
+                          <a href="/admin/finance/tiposervicio/add/" class="add-another" id="add_id_{{ form.tipo.html_name }}"
+                              onclick="return showAddAnotherPopup(this);">
+                              <i class="icon-plus"></i>
+                            </a>
+                            <br>
+                        <label>{{ form.importe.label_tag }}</label>
+                        <input id="{{form.importe.id_for_label}}" name="{{ form.importe.html_name }}" type="number" step="0.01" class="form-control" value="{{ form.importe.value|default_if_none:"" }}">
+                        <p class="help-block">{{ form.importe.errors }}</p>
+                      </div>
+                    {% endfor %}
+                    </div>
+                    <div class="tab-pane" id="box_tab7">
+                      {{ alumnoSala_form.management_form|crispy }}
+                      {{ alumnoSala_form.non_form_errors }}
+                      {% for form in alumnoSala_form %}
+                        {{ form.id }}
+                        <div class="inline {{ alumnoSala_form.prefix }}">
+                          {% if form.instance.pk %}{{ form.DELETE }}{% endif %}
+                          <label>Sala</label>
+                          <select id="{{ form.sala.id_for_label }}" name="{{ form.sala.html_name }}" class="form-control">
+                              {% for sala in form.sala %}
+                                <option value={{sala}}</option>
+                              {% endfor %}
+                          </select>
+                          <a href="/admin/students/sala/add/" class="add-another" id="add_id_{{ form.sala.html_name }}"
+                             onclick="return showAddAnotherPopup(this);">
+                             <i class="icon-plus"></i>
+                          </a>
+                          <br>
+
+                          <label>Estado</label>
+                          <select id="{{ form.estado.id_for_label }}" name="{{ form.estado.html_name }}" class="form-control">
+                              {% for estado in form.estado %}
+                                <option value={{estado}}</option>
+                              {% endfor %}
+                          </select>
+                          <label>{{ form.comentarios.label_tag }}</label>
+                          <input id="{{form.comentarios.id_for_label}}" name="{{ form.comentarios.html_name }}" type="text" step="0.01" class="form-control" value="{{ form.comentarios.value|default_if_none:"" }}">
+                          <p class="help-block">{{ form.comentarios.errors }}</p>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div> <!-- /.tabbable portlet-tabs -->
+              </div> <!-- /.widget-content -->   
+              <button type="submit" class="btn btn-primary">
+                  Guardar
+              </button>
+            </div>
+           
+          </form>
+        </div>
+    </div>
+{% endblock %}
+{% block extra_scripts %}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+  <script src="{% static 'js/jquery.formset.min.js' %}"></script>
+  <script src="/static/js/datepicker-edujango.js"></script>
+  <script type="text/javascript">
+    $(function() {
+        $(".inline.{{ servicio_form.prefix }}").formset({
+            prefix: "{{ servicio_form.prefix }}",
+            addText: "Agregar",
+            deleteText: "Eliminar",
+        });
+        $(".inline.{{ alumnoSala_form.prefix }}").formset({
+            prefix: "{{ alumnoSala_form.prefix }}",
+            addText: "Agregar",
+            deleteText: "Eliminar",
+        });
+    });
+  </script>
+  <script>
+      $('#gestion-alumnos').addClass('current');
+      $('#alumnos').addClass('current');
+  </script>
+  <script type="text/javascript" src="{% static 'js/RelatedObjectLookups.js' %}"></script>
+{% endblock %}

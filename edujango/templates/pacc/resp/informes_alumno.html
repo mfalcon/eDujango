@@ -1,0 +1,54 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Jardín Mi Arco Iris - {{ block.super }}{% endblock %}
+
+
+
+{% block main_content %}
+    <h2>Informes del alumno Emiliano Fiore</h2>
+    <br />
+    <div class="row">
+        <form class="form-inline">
+            <input type="text" class="input-medium search-query">
+            <button type="submit" class="btn">Search</button>
+            <!--<select id="selection">
+                <option>Año</option>
+                <option>Tipo</option>
+            </select>-->
+        </form>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                  <th>Nombre <i class="icon-chevron-down"></i></th>
+                  <th>Fecha <i class="icon-chevron-down"></i></th>
+                  <th>Hecho por <i class="icon-chevron-down"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td>1°cuatrimestre 2012</td>
+                  <td>09/04/2012</td>
+                  <td>Sanguín, Verónica</td>
+                  <td><a href="{% url 'informe_alumno' %}">Ver informe</a></td>
+                </tr>
+                <tr>
+                  <td>2°cuatrimestre 2011</td>
+                  <td>19/09/2011</td>
+                  <td>Zenobi, Viviana</td>
+                  <td><a href="#">Ver informe</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="pagination">
+            <ul>
+                <li><a href="#">Anterior</a></li>
+                <li class="active">
+                    <a href="#">1</a>
+                </li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">Siguiente</a></li>
+            </ul>
+        </div>
+    </div>     
+{% endblock %}

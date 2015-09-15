@@ -1,0 +1,56 @@
+{% extends "base_pacc.html" %}
+ 
+{% block title %}Modificar pago - {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'f_index' %}">Finanzas</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'f_students' %}">Alumnos</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="#">Modificar pago</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main_content %} 
+    <h2>Modificar pago</h2>
+    {% comment %}
+    <div class="row">
+        <div class="span3 offset9">
+            <a href="{% url 'f_student_report' st.id %}">Crear Comprobante</a>
+        </div>
+    </div>
+    <br />
+    <br />
+    {% endcomment %}
+    <div class="row">
+        <div class="span8 offset2">
+            <h3>Situación financiera</h3>
+            <p>{{ st.get_full_name }}: 
+    
+            {% if st_debt == 0 %}
+                <p>El alumno no debe nada en estos momentos.</p>
+            {% else %}
+            <p><span class="inf">Deuda:</span></p> 
+            <p><span class="inf">Cuotas:</span>  $ {{ st_debt.0 }}</p>
+            <p><span class="inf">Otros:</span>  $ {{ st_debt.1 }}</p>
+            {% endif%}
+            <!-- Ver bien el tema de la deuda = 0 -->
+            
+            <form id="create" method="POST" action="">{% csrf_token %}
+                    <!--<ul id="list">-->
+                    {{ form.as_p }}
+                    <!--</ul>-->
+                <input id="boton_aceptar" type="submit" value="Enviar">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

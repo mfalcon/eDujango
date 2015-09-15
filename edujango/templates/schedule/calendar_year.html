@@ -1,0 +1,46 @@
+{% extends "base_website.html" %}
+{% load staticfiles %}
+{% load scheduletags i18n %}
+{% block content %}
+{% block body %}
+<div id="main" class="round_8 clearfix">  
+    <div class="red page_title round_6">
+      <h1 class="replace">Calendario</h1>
+  </div>
+    <div class="navigation">
+  <a href="{% url "month_calendar" calendar.slug %}">
+    Calendario de éste mes
+  </a> |
+  <a href="{% url "year_calendar" calendar.slug %}">
+    Calendario de éste año
+  </a>
+</div>
+<div class="tablewrapper">
+    {% prevnext "year_calendar" calendar.slug periods.year "Y" %}
+    <table align="center">
+    <tr>
+    {% for month in periods.year.get_months %}
+        <td valign="top">
+        <a href="{% url "month_calendar" calendar.slug %}{% querystring_for_date month.start 2 %}">
+            {{month.name}}
+        </a>
+        {% month_table calendar month "small" %}</td>
+        <td width="12">&nbsp;</td>
+        {% ifequal forloop.counter 3  %}
+            </tr>
+            <tr>
+        {% endifequal %}
+        {% ifequal forloop.counter 6  %}
+            </tr>
+            <tr>
+        {% endifequal %}
+        {% ifequal forloop.counter  9 %}
+            </tr>
+            <tr>
+        {% endifequal %}
+    {% endfor %}
+    </tr>
+</table></div>
+</div>
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,91 @@
+{% load i18n staticfiles %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<!-- Meta info begin-->
+<title>Mi Arco Iris - {% block title %}{% endblock %}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="robots" content="index, follow" />
+<!-- Meta info end-->
+
+<link rel="shortcut icon" href="{% static 'website/img/favicon2.ico' %}" />
+<link rel="home" href="{% url 'zinnia_entry_archive_index' %}" />    
+<link rel="stylesheet" type="text/css" media="screen, projection" href="{% static 'zinnia/css/screen.css' %}" />
+<link rel="stylesheet" type="text/css" media="print" href="{% static 'zinnia/css/print.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'website/css/style.css' %}" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<style type="text/css">
+
+h3 {
+  background-color: lightgrey;
+  border-radius:6px;
+}
+</style>
+</head>
+
+<body  class="zinnia {% block sidebar-class %}right-sidebar{% endblock sidebar-class %} {% block body-class %}{% endblock body-class %}">
+    <div class="container">
+<div id="content-wrapper"> 
+    
+    <!-- Container begin -->
+    <div id="container" > 
+        <!-- Header begin-->
+        <div id="header" class="clearfix">
+            <div id="logo"> <a href="{% url 'home' %}"><img src="{% static 'website/img/logo.png' %}" alt="logo" /></a> </div>
+            <!-- Navigation start -->
+            <ul class="sf-menu" style="list-style:none; margin:0; padding:0;">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="/weblog/">Novedades</a></li>
+                <li><a href="/schedule/calendar/month/calendario/">Calendario</a></li>
+                <li><a href="{% url 'institucional' %}">Institucional</a></li>
+                <li><a href="{% url 'actividades' %}">Actividades</a></li>
+                <li><a href="{% url 'fotos' %}">Fotos</a></li>
+                <li><a href="{% url 'salas' %}">Salas</a></li>
+                <!--<li><a href="./contacto.html">Contacto</a></li>-->
+            </ul>
+            <!-- Navigation end --> 
+        </div>
+        <!-- Header end --> 
+        
+        <!-- Main begin-->
+        <div class="container" style="margin-top:-12px;border-radius:10px;background: #FFF; margin-bottom: 20px; padding: 20px 15px 35px;">
+
+          <div id="header">
+            <div class="page_title round_6" style="background-color: #f8d7db;">
+              <h1 class="replace" href="{% url 'zinnia_entry_archive_index' %}" title="Noticias" rel="home" style="font-weight:normal; color: #0082c0; font-weight:bold; line-height: 1;border:0; outline:0; font-size:100%; vertical-align:baseline; background:transparent; margin:0; padding:0; font-size: 32px; color: #0082c0; margin-bottom: 0; line-height: 1; color: #af1520;">Noticias </h1>
+            </div>
+          <blockquote>
+            <p></p>
+          </blockquote>
+            {% block breadcrumbs %}{% endblock breadcrumbs %}
+          </div>
+          {% block slider %}{% endblock slider %}
+          <div id="content" class="hfeed">
+            {% block content %}
+            
+            {% endblock content %}
+          </div>
+          <div id="sidebar">
+            {% block sidebar %}
+            {% endblock sidebar %}
+          </div>
+          <!-- Container end --> 
+        </div>
+        <div id="footer" class="round_8 clearfix">
+              <div id="footer-bottom">
+                  <div id="footer-note" class="right">Jardín de infantes Mi Arco Iris - DIPREGEP N° 5445 - Dirección: Echeverría 5861, Villa Bosch - Teléfono: 4844-0628 - E-mail: jardinmiarcoiris@yahoo.com.ar</div>
+              </div>
+          </div>
+        <!-- Footer end --> 
+    </div>
+    
+</div>
+<!--Full background-->
+<div id="supersized"></div>
+</body>
+</html>

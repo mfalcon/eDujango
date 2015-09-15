@@ -1,0 +1,50 @@
+{% extends "base_pacc.html" %}
+
+{% block title %}Empleados - {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'f_index' %}">Finanzas</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="#">Empleados</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main_content %}
+
+<div class="row">
+    <div class="span3 offset9">
+        {% comment %}<input type="button" value="Generar Sueldos Mensuales">{% endcomment %}
+        <a href="{% url 'f_sueldos_mensuales' %}">Generar Sueldos Mensuales</a>
+        {% comment %}<input type="button" value="Add Payment">
+        <a href="{% url 'f_new_payment' %}">Realizar Pago</a>{% endcomment %}
+    </div>
+</div>
+
+<div class="row">
+    <div class="span8 offset2">
+        <table class="table table-stripped">
+            <thead>
+                <th>Nombre</th>
+                <th>Tipo</th>
+            </thead>
+            <tbody>
+                {% for emp in empleados %}
+                    <tr>
+                    <td><a href="{% url 'f_empleado_info' emp.id %}">{{ emp.last_name }}, {{ emp.first_name }}</a>
+                    <td>{{ emp.get_puesto_display }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}

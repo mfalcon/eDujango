@@ -1,0 +1,41 @@
+{% extends 'new/base.html' %}
+{% load bootstrap3 %}
+{% block title %}Editar Servicio Suscripto{% endblock %}
+{% block breadcumb %}
+  <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'jardin' %}">Inicio</a>
+  </li>
+  <li>
+    <i class="icon-group"></i>
+    <a href="#">Gestión de Alumnos</a>
+  </li>
+  <li>    
+    <a href="{% url 'servicios-jardin' %}">Servicios Suscriptos</a>
+  </li>
+  <li class="current">    
+    <a href="#">EEditar Servicio Suscripto</a>
+  </li>
+{% endblock %}
+{% block content %}
+    <div class="col-md-12">
+        <div class="panel-body">
+            <div class="col-lg-4">
+                <form class="form-horizontal tasi-form" method="POST">{% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary">
+                        Guardar
+                    </button>
+                {% endbuttons %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extra_scripts %}
+    <script>
+        $('#gestion-alumnos').addClass('current');
+        $('#servicios').addClass('current');
+    </script>
+{% endblock %}

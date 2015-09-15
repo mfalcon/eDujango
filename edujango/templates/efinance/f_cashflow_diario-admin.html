@@ -1,0 +1,75 @@
+{% extends "base_pacc.html" %}
+ 
+{% block title %}Cashflow Diario - {{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divclasser">/</span>
+    </li>
+    <li>
+        <a href="{% url 'f_index' %}">Finanzas</a> <span class="divclasser">/</span>
+    </li>
+    <li>
+        <a href="{% url 'f_cashflow' %}">Cashflow</a> <span class="divclasser">/</span>
+    </li>
+    <li class="active">
+        <a href="#">Cashflow Diario</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main_content %}
+
+    <div class="row">
+        <div class="span8 offset2">
+        {% if movimientos %}
+            <table class="table table-stripped">
+            <thead>
+                <th>Tipo</th>
+                <th>Ingresos</th>
+                <th>Gastos</th>
+            </thead>
+            <tfoot>
+                <td>Total: </td>
+                <td>{{ ingresos }}</td>
+                <td>{{ gastos }}</td>
+            </tfoot>
+            <tbody>
+            {% for m in movimientos %}
+                <tr>
+                    {% if m.1 == 'ingreso' %}
+                    <td><a href="">Cuota de {{ m.0.alumno }}</a></td>
+                    <td class="ingreso">{{ m.0.abona }}</td>
+                    <td></td>
+                    {% else %}{% if m.1 == 'ingreso_unico' %}
+                    <td><a href="">{{ m.0.tipo.get_tipo_display }} de {{ m.0.alumno }}</a></td>
+                    <td class="ingreso">{{ m.0.importe }}</td>
+                    <td></td>
+                    {% else %}{% if m.1 == 'sueldo' %}
+                    <td><a href="">{{ m.0 }}</a></td>
+                    <td></td>
+                    <td class="gasto">{{ m.0.abona }}</td>
+                    {% else %}{% if m.1 == 'gasto' %}
+                    <td><a href={{ m.0.get_absolute_url }}>{{ m.0.get_tipo }}</a></td>
+                    <td></td>
+                    <td class="gasto">{{ m.0.importe }}</td>
+                    {% endif %}{% endif %}{% endif %}{% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        {% else %}
+            <p>No hay movimientos actualmente.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_body %}
+<script>
+    $(document).ready(function() {
+        $('#ftab').tableFilter();
+    });
+</script>
+{% endblock %}

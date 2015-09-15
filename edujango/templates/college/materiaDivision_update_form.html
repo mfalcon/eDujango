@@ -1,0 +1,39 @@
+{% extends 'new/base_colegio.html' %}
+{% load bootstrap3 %}
+{% block title %}Editar Materia Division{% endblock %}
+{% block breadcumb %}
+  <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'college' %}">Inicio</a>
+  </li>
+  <li>
+    <i class="icon-group"></i>
+    <a href="#">Gestión de Profesores</a>
+  </li>
+  <li><a href="{% url 'materiasdivisiones' %}">Materias Divisiones</a></li>
+  <li class="current">    
+    <a href="#">Editar Materia Division</a>
+  </li>
+{% endblock %}
+{% block content %}
+    <div class="col-md-12">
+        <div class="panel-body">
+            <div class="col-lg-4">
+                <form class="form-horizontal tasi-form" method="POST">{% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary">
+                        Guardar
+                    </button>
+                {% endbuttons %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extra_scripts %}
+    <script>
+        $('#gestion-profesores').addClass('current');
+        $('#materiasdivisiones').addClass('current');
+    </script>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'new/base_colegio.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Añadir Profesor{% endblock %}
+{% block breadcumb %}
+  <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'college' %}">Inicio</a>
+  </li>
+  <li>
+    <i class="icon-group"></i>
+    <a href="#">Gestión de Profesores</a>
+  </li>
+  <li>    
+    <a href="{% url 'profesores' %}">Profesores</a>
+  </li>
+  <li class="current">    
+    <a href="#">Añadir Profesor</a>
+  </li>
+{% endblock %}
+{% block content %}
+    <div class="col-md-12">
+        <div class="panel-body">
+            <div class="col-lg-4">
+                <form class="form-horizontal tasi-form" method="POST">{% csrf_token %}
+                {% crispy form %}
+                   
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extra_scripts %}
+    <script>
+        $('#gestion-profesores').addClass('current');
+        $('#profesores').addClass('current');
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script src="/static/js/datepicker-edujango.js"></script>
+{% endblock %}

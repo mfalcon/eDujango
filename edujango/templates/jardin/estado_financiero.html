@@ -1,0 +1,27 @@
+{% extends 'new/base.html' %}
+{% load bootstrap3 %}
+{% block title %}Estado Financiero{% endblock %}
+{% block breadcumb %}
+  <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'jardin' %}">Inicio</a>
+  </li>
+  <li>
+    <i class="icon-group"></i>
+    <a href="#">Gestión de Finanzas</a>
+  </li>
+  <li class="current">    
+    <a href="#">Estado Financiero</a>
+  </li>
+{% endblock %}
+{% block content %}
+    <div class="col-md-12">
+    </div>
+	
+{% endblock %}
+{% block extra_scripts %}
+    <script>
+        $('#gestion-finanzas').addClass('current');
+        $('#estado-financiero-jardin').addClass('current');
+    </script>
+{% endblock %}

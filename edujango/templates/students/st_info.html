@@ -1,0 +1,68 @@
+{% extends "base_pacc.html" %}
+ 
+{% block title %}Informacion alumno{{ block.super }}{% endblock %}
+
+{% block nav %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'index' %}">Home</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{% url 'st_students_list' %}">Alumnos</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <a href="#">Informes</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main_content %}
+<h2>Informes de {{ student.get_full_name }}</h2>
+
+
+
+<div class="row">
+{% if user.empleado.puesto == 2 %}
+{% comment %}template tag: {% if maestra student %}{% endcomment %}
+    <div class="span2 offset10">
+            <a href="{% url 'st_nuevo_informe' student.id %}">Nuevo informe</a>       
+    </div>
+{% else %}
+    <div class="span5">
+            {% comment %}<h3>Informes más recientes de {{ student.get_full_name }}:</h3>{% endcomment %}
+    </div>
+{% endif %}
+</div>
+
+<div class="row"></div>
+{% if student.get_informes %}
+
+    <div class="span10">
+        <table class="table table-stripped">
+            <thead>
+                <th>Titulo</th>
+                <th>Maestra</th>
+                <th>Fecha</th>
+            </thead>
+            <tbody>
+                {% for informe in student.get_informes %}
+                    <tr>
+                        <td><a href="{% url 'st_student_report' informe.id %}">{{ informe.titulo }}</a></td>
+                        <td>{{ informe.maestra }}</td>
+                        <td>{{ informe.fecha }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="span8">
+            <a href="{% url 'st_student_reports' student.id %}">Ver todos los informes</a>
+    </div>
+    
+{% else %}
+    <p>Aún no hay informes para este alumno.</p>
+{% endif %} 
+</div>
+
+{% endblock %}   
