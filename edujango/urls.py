@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 
 
-from efinance.views import DemoView
+#from efinance.views import DemoView
 #from efinance.views import empleados, f_cashflow_mensual, f_cashflow_diario, f_cashflow_semanal, f_cashflow_anual
 #from finance.views import students
 
@@ -35,7 +35,7 @@ urlpatterns = patterns('',
     url(r'^weblog/', include('zinnia.urls')),
     url(r'^comments/', include('django.contrib.comments.urls')),
 
-    url(r'^demo/$', DemoView.as_view(), name='demo'),
+    #url(r'^demo/$', DemoView.as_view(), name='demo'),
 
     url(r'^colegio/', include('college.urls')),
     url(r'^jardin/', include('jardin.urls')),

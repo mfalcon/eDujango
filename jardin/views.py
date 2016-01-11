@@ -111,7 +111,7 @@ class AlumnoCreateView(LoginRequiredMixin, CreateView):
             sala = Sala.objects.get(pk=sala_id)
             p = AlumnoSala(alumno=alumno, estado=estado,sala=sala,comentarios=comentarios)
             p.save()
-        import pdb; pdb.set_trace()
+
         self.object = form.save()
         servicio_form.instance = self.object
         servicio_form.save()

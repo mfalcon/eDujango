@@ -64,7 +64,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'tenant_schemas.middleware.TenantMiddleware',
+    #'tenant_schemas.middleware.TenantMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -106,46 +106,22 @@ SHARED_APPS = (
     'mptt', #blog
     'zinnia', #blog
     'schedule', #Calendario
-    'tenant_schemas',
+    #'tenant_schemas',
     'bootstrap3',
     'jardin',
     'crispy_forms',
     
 )
 
-TENANT_APPS = (
-    'django.contrib.auth',
-    'django.contrib.sessions',
-    'django.contrib.contenttypes',
-    'django.contrib.sites',
-    'django.contrib.admin',
-    'django.contrib.staticfiles',
-    'students',
-    'finance',
-    'efinance',
-    'eventos',
-    'college',
-    'tagging', #blog
-    'mptt', #blog
-    'zinnia', #blog
-    'schedule', #Calendario
-    'tenant_schemas',
-    'bootstrap3',
-    'jardin',
-    'south',
-    'crispy_forms',
-   
-)
 
-INSTALLED_APPS = SHARED_APPS + TENANT_APPS + ('tenant_schemas',)
-
+INSTALLED_APPS = SHARED_APPS 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 SOUTH_DATABASE_ADAPTERS = {
     'default': 'south.db.postgresql_psycopg2',
 }
 
-TENANT_MODEL = "efinance.Client"
+#TENANT_MODEL = "efinance.Client"
 
 SITE_ID = 1
 

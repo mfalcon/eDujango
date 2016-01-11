@@ -10,7 +10,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Fieldset, ButtonHolder, Submit
 from crispy_forms.bootstrap import TabHolder, Tab
 
-from efinance.models import PagoSueldo, Gasto, Empleado, Sueldo, Client
+from efinance.models import PagoSueldo, Gasto, Empleado, Sueldo#, Client
 from datetime import date
 
 
@@ -79,7 +79,7 @@ class GastoCrispyForm(ModelForm):
     class Meta:
         model = Gasto
 
-
+'''
 class DemoForm(forms.Form):
     nombre = forms.CharField(max_length=50)
     dni = forms.IntegerField()
@@ -104,7 +104,7 @@ class DemoForm(forms.Form):
         if password1 != password2:
             raise forms.ValidationError("Tus contraseñas no coinciden")
         return password2
-
+'''
 
 
 class PagoSueldoForm(ModelForm):

@@ -20,7 +20,6 @@ django-mptt==0.5.1
 django-registration==1.0
 django-scheduler==0.7.1
 django-tagging==0.3.2
-django-tenant-schemas==1.4.7
 django-tinymce==1.5.2
 django-xhtml2pdf==0.0.3
 django-xmlrpc==0.1.5

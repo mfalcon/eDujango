@@ -11,14 +11,14 @@ from django.utils.translation import ugettext as _
 from django.contrib.auth.decorators import login_required
 from django.forms.models import model_to_dict
 from django.core.management import call_command
-from tenant_schemas.utils import tenant_context
+#from tenant_schemas.utils import tenant_context
 from django.views.generic.edit import FormView
 from django.contrib.sites.models import Site
 from django.conf import settings
 
-from efinance.forms import PagoSueldoForm, GastoForm, DemoForm
+from efinance.forms import PagoSueldoForm, GastoForm #, DemoForm
 from efinance.utils import generar_sueldos, pago_sueldo
-from efinance.models import Gasto, Empleado, PagoSueldo, Sueldo, Client
+from efinance.models import Gasto, Empleado, PagoSueldo, Sueldo #, Client
 from finance.models import Pago, UnicoPago, Cuota, CustomUser
 
 from datetime import date
@@ -32,7 +32,7 @@ import pdb
 #If you are C level at your company, spend at least an hour a month understanding these three reports. If you don't understand something ask your accountant or Google. As the OP says, there are more than just employees jobs riding on these reports (or what they represent); their families are also depending on good numbers. Sometimes the reports are not good news - they key is not to fool yourself, but to understand the truth. If you understand the truth you can make better decisions. If you do not understand the truth, it is very hard to make a good decision.
 #Some days you are making money, but you have to wait for accounts receivable to get paid. Some days you have a bunch of money in the bank because of new funding, or a customer pre-paid, or you haven't taken care of all the payables yet. Just don't lie to yourself, and don't get lied to.
 #It is not that hard to understand the three reports; they are basic arithmetic and counting - the key is to just do it. Personally, I look at it every week after doing payroll. You can choose your own schedule, just choose one and look at all three reports. Even if you only do it quarterly, you will at least know what is going on.
-
+'''
 class DemoView(FormView):
     template_name = 'demo.html'
     form_class = DemoForm
@@ -63,7 +63,7 @@ class DemoView(FormView):
         
 
         return super(DemoView, self).form_valid(form)
-
+'''
 
 @login_required
 def empleados(request):

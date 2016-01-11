@@ -12,6 +12,7 @@ from datetime import date
 import pdb
 
 from finance.models import CustomUser
+'''
 from tenant_schemas.models import TenantMixin
 
 
@@ -24,7 +25,7 @@ class Client(TenantMixin):
 
     # default true, schema will be automatically created and synced when it is saved
     auto_create_schema = True
-
+'''
 
 
 
